@@ -1,6 +1,7 @@
+'use client';
+
 import React, { useState, useEffect } from 'react';
 import { quotes } from '@/constants';
-import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/24/solid';
 
 export default function Banner() {
   const [currentQuote, setCurrentQuote] = useState(0);
