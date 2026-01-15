@@ -16,16 +16,16 @@ html {
 }
 
 ::-webkit-scrollbar-track {
-  background: #121212;
+  background: #000000;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #ff0000;
+  background: #fca311;
   border-radius: 5px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #cc0000;
+  background: #e59400;
 }
 
 /* Grid pattern background */
@@ -41,8 +41,8 @@ html {
 
 /* Selection colors */
 ::selection {
-  background-color: #ff0000;
-  color: #fff;
+  background-color: #fca311;
+  color: #000;
 }
 
 /* Animations */

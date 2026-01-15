@@ -24,7 +24,7 @@ export default function Banner() {
   const quote = quotes[currentQuote];
 
   return (
-    <section className="relative h-96 bg-gradient-to-br from-dark-secondary to-dark flex items-center justify-center overflow-hidden">
+    <section className="relative h-96 bg-gradient-to-br from-prussian to-black flex items-center justify-center overflow-hidden">
       {/* Background Effects */}
       <div className="absolute inset-0 bg-grid-pattern opacity-10"></div>
 
@@ -37,7 +37,7 @@ export default function Banner() {
 
         <div className="flex flex-col items-center gap-4">
           <h3 className="text-2xl">
-            <span className="text-accent font-bold">PHYSICS ASSOCIATION</span>
+            <span className="text-orange font-bold">PHYSICS ASSOCIATION</span>
           </h3>
           <h4 className="text-xl text-white font-semibold">BITS PILANI</h4>
         </div>
@@ -46,7 +46,7 @@ export default function Banner() {
       {/* Navigation Buttons */}
       <button
         onClick={prevQuote}
-        className="absolute left-4 top-1/2 transform -translate-y-1/2 z-20 bg-accent hover:bg-red-600 text-white p-2 rounded-full transition-colors"
+        className="absolute left-4 top-1/2 transform -translate-y-1/2 z-20 bg-orange hover:bg-orange/80 text-white p-2 rounded-full transition-colors"
         aria-label="Previous quote"
       >
         <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
@@ -60,7 +60,7 @@ export default function Banner() {
 
       <button
         onClick={nextQuote}
-        className="absolute right-4 top-1/2 transform -translate-y-1/2 z-20 bg-accent hover:bg-red-600 text-white p-2 rounded-full transition-colors"
+        className="absolute right-4 top-1/2 transform -translate-y-1/2 z-20 bg-orange hover:bg-orange/80 text-white p-2 rounded-full transition-colors"
         aria-label="Next quote"
       >
         <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
@@ -79,7 +79,7 @@ export default function Banner() {
             key={index}
             onClick={() => setCurrentQuote(index)}
             className={`h-2 rounded-full transition-all ${
-              index === currentQuote ? 'bg-accent w-6' : 'bg-gray-600 w-2'
+              index === currentQuote ? 'bg-orange w-6' : 'bg-prussian w-2'
             }`}
             aria-label={`Quote ${index + 1}`}
           />

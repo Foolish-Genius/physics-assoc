@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import './globals.css';
-import { Header, Footer } from '@/components';
+import { Header, Footer, ParticleBackground } from '@/components';
 
 export const metadata: Metadata = {
   title: 'Physics Association | BITS Pilani',
@@ -44,9 +44,10 @@ export default function RootLayout({
           rel="stylesheet"
         />
       </head>
-      <body className="bg-dark text-white font-poppins antialiased">
+      <body className="bg-black text-white font-poppins antialiased">
+        <ParticleBackground />
         <Header />
-        <main className="min-h-screen">{children}</main>
+        <main className="min-h-screen relative z-10">{children}</main>
         <Footer />
       </body>
     </html>

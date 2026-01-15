@@ -18,7 +18,7 @@ export default function ArticleCard({
   url,
 }: ArticleCardProps) {
   return (
-    <article className="bg-dark-secondary rounded-lg overflow-hidden hover:transform hover:scale-105 transition-transform duration-300">
+    <article className="bg-prussian/30 backdrop-blur-sm rounded-lg overflow-hidden hover:transform hover:scale-105 transition-transform duration-300 border border-prussian">
       {/* Image Container */}
       <div className="relative h-48 overflow-hidden">
         <Image
@@ -32,7 +32,7 @@ export default function ArticleCard({
       {/* Content */}
       <div className="p-6">
         <Link href={url} target="_blank" rel="noopener noreferrer">
-          <h3 className="text-xl font-bold text-white hover:text-accent transition-colors mb-3">
+          <h3 className="text-xl font-bold text-white hover:text-orange transition-colors mb-3">
             {title}
           </h3>
         </Link>
@@ -40,12 +40,12 @@ export default function ArticleCard({
         <p className="text-gray-400 text-sm mb-4 line-clamp-3">{description}</p>
 
         <div className="flex justify-between items-center">
-          <span className="text-accent font-semibold text-sm">{author}</span>
+          <span className="text-orange font-semibold text-sm">{author}</span>
           <Link
             href={url}
             target="_blank"
             rel="noopener noreferrer"
-            className="text-accent hover:text-red-600 transition-colors font-semibold"
+            className="text-orange hover:text-orange/80 transition-colors font-semibold"
           >
             Read →
           </Link>

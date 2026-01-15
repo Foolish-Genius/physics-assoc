@@ -9,9 +9,14 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        dark: '#121212',
-        'dark-secondary': '#1e1e1e',
-        accent: '#ff0000',
+        black: '#000000',
+        prussian: '#14213d',
+        orange: '#fca311',
+        alabaster: '#e5e5e5',
+        white: '#ffffff',
+        dark: '#000000',
+        'dark-secondary': '#14213d',
+        accent: '#fca311',
       },
       fontFamily: {
         poppins: ['Poppins', 'sans-serif'],

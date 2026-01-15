@@ -4,13 +4,13 @@ import Link from 'next/link';
 
 export default function Header() {
   return (
-    <header className="sticky top-0 z-50 bg-dark border-b border-dark-secondary">
+    <header className="sticky top-0 z-50 bg-black/80 backdrop-blur-sm border-b border-prussian">
       <nav className="container mx-auto px-4 py-4">
         <div className="flex justify-between items-center">
           {/* Logo */}
           <Link href="/" className="flex items-center gap-2">
             <h2 className="text-2xl font-bold">
-              <span className="text-accent">Physics</span>
+              <span className="text-orange">Physics</span>
               <span className="text-white"> Association</span>
             </h2>
           </Link>
@@ -22,7 +22,7 @@ export default function Header() {
                 <li key={link.label}>
                   <Link
                     href={link.href}
-                    className="text-gray-300 hover:text-accent transition-colors"
+                    className="text-alabaster hover:text-orange transition-colors"
                   >
                     {link.label}
                   </Link>
@@ -40,7 +40,7 @@ export default function Header() {
                     href={social.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-gray-300 hover:text-accent transition-colors text-xl"
+                    className="text-alabaster hover:text-orange transition-colors text-xl"
                     aria-label={social.name}
                   >
                     <Icon />

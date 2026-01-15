@@ -6,13 +6,13 @@ export default function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="bg-dark-secondary border-t border-gray-700">
+    <footer className="bg-prussian/50 backdrop-blur-sm border-t border-prussian relative z-10">
       <div className="container mx-auto px-4 py-12">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
           {/* About */}
           <div>
             <h3 className="text-xl font-bold text-white mb-4">
-              <span className="text-accent">Physics</span> Association
+              <span className="text-orange">Physics</span> Association
             </h3>
             <p className="text-gray-400">
               Promoting the beautiful language of physics at BITS Pilani
@@ -24,19 +24,19 @@ export default function Footer() {
             <h4 className="text-lg font-bold text-white mb-4">Quick Links</h4>
             <ul className="space-y-2">
               <li>
-                <Link href="/" className="text-gray-400 hover:text-accent transition-colors">
+                <Link href="/" className="text-alabaster hover:text-orange transition-colors">
                   Home
                 </Link>
               </li>
               <li>
-                <Link href="/about" className="text-gray-400 hover:text-accent transition-colors">
+                <Link href="/about" className="text-alabaster hover:text-orange transition-colors">
                   About Us
                 </Link>
               </li>
               <li>
                 <a
                   href="https://bitsphyassoc.github.io/blog"
-                  className="text-gray-400 hover:text-accent transition-colors"
+                  className="text-alabaster hover:text-orange transition-colors"
                 >
                   Blog
                 </a>
@@ -56,7 +56,7 @@ export default function Footer() {
                     href={social.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-gray-400 hover:text-accent transition-colors text-2xl"
+                    className="text-alabaster hover:text-orange transition-colors text-2xl"
                     aria-label={social.name}
                   >
                     <Icon />

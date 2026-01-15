@@ -10,7 +10,7 @@ export default function Home() {
       <Banner />
 
       {/* About Section */}
-      <section className="py-20 bg-dark">
+      <section className="py-20 bg-transparent">
         <div className="container mx-auto px-4">
           <SectionHeading title="About Us" />
 
@@ -22,7 +22,7 @@ export default function Home() {
               </p>
               <Link
                 href="/about"
-                className="inline-block bg-accent hover:bg-red-600 text-white font-bold py-3 px-8 rounded-lg transition-colors"
+                className="inline-block bg-orange hover:bg-orange/80 text-white font-bold py-3 px-8 rounded-lg transition-colors"
               >
                 Read More
               </Link>
@@ -42,7 +42,7 @@ export default function Home() {
       </section>
 
       {/* Events Section */}
-      <section className="py-20 bg-dark-secondary">
+      <section className="py-20 bg-prussian/20 backdrop-blur-sm">
         <div className="container mx-auto px-4">
           <SectionHeading
             title="Upcoming Events"
@@ -57,13 +57,13 @@ export default function Home() {
       </section>
 
       {/* Featured Articles Section */}
-      <section className="py-20 bg-dark">
+      <section className="py-20 bg-transparent">
         <div className="container mx-auto px-4">
           <div className="flex justify-between items-start mb-12">
             <SectionHeading title="Featured Articles" />
             <Link
               href="https://bitsphyassoc.github.io/blog/"
-              className="text-accent hover:text-red-600 transition-colors font-semibold whitespace-nowrap mt-4"
+              className="text-orange hover:text-orange/80 transition-colors font-semibold whitespace-nowrap mt-4"
             >
               Go to Blog →
             </Link>

@@ -35,10 +35,10 @@ export default function About() {
   return (
     <main className="min-h-screen">
       {/* Hero Section */}
-      <section className="py-20 bg-gradient-to-br from-dark-secondary to-dark">
+      <section className="py-20 bg-gradient-to-br from-prussian to-black">
         <div className="container mx-auto px-4">
           <h1 className="text-5xl md:text-6xl font-bold text-white mb-6">
-            About <span className="text-accent">Physics</span> Association
+            About <span className="text-orange">Physics</span> Association
           </h1>
           <p className="text-xl text-gray-400 max-w-2xl">
             Promoting the beautiful language of physics at BITS Pilani
@@ -47,7 +47,7 @@ export default function About() {
       </section>
 
       {/* Mission Section */}
-      <section className="py-20 bg-dark">
+      <section className="py-20 bg-transparent">
         <div className="container mx-auto px-4">
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div>
@@ -80,16 +80,16 @@ export default function About() {
       </section>
 
       {/* Values Section */}
-      <section className="py-20 bg-dark-secondary">
+      <section className="py-20 bg-prussian/20 backdrop-blur-sm">
         <div className="container mx-auto px-4">
           <h2 className="text-4xl font-bold text-white mb-12 text-center">Our Values</h2>
           <div className="grid md:grid-cols-2 gap-8">
             {teamValues.map((value, index) => (
               <div
                 key={index}
-                className="bg-dark p-8 rounded-lg border border-gray-700 hover:border-accent transition-colors"
+                className="bg-prussian/30 backdrop-blur-sm p-8 rounded-lg border border-prussian hover:border-orange transition-colors"
               >
-                <h3 className="text-2xl font-bold text-accent mb-4">{value.title}</h3>
+                <h3 className="text-2xl font-bold text-orange mb-4">{value.title}</h3>
                 <p className="text-gray-300 text-lg">{value.description}</p>
               </div>
             ))}
@@ -98,46 +98,46 @@ export default function About() {
       </section>
 
       {/* Content Section */}
-      <section className="py-20 bg-dark">
+      <section className="py-20 bg-transparent">
         <div className="container mx-auto px-4">
           <h2 className="text-4xl font-bold text-white mb-12">What We Offer</h2>
 
           <div className="grid md:grid-cols-3 gap-8 mb-12">
-            <div className="bg-dark-secondary p-8 rounded-lg">
-              <h3 className="text-2xl font-bold text-accent mb-4">Blog Articles</h3>
+            <div className="bg-prussian/30 backdrop-blur-sm p-8 rounded-lg border border-prussian">
+              <h3 className="text-2xl font-bold text-orange mb-4">Blog Articles</h3>
               <p className="text-gray-300 mb-6">
                 In-depth articles covering various topics in physics, from quantum mechanics to
                 cosmology.
               </p>
               <Link
                 href="https://bitsphyassoc.github.io/blog"
-                className="text-accent hover:text-red-600 transition-colors font-semibold"
+                className="text-orange hover:text-orange/80 transition-colors font-semibold"
               >
                 Read Articles →
               </Link>
             </div>
 
-            <div className="bg-dark-secondary p-8 rounded-lg">
-              <h3 className="text-2xl font-bold text-accent mb-4">Social Content</h3>
+            <div className="bg-prussian/30 backdrop-blur-sm p-8 rounded-lg border border-prussian">
+              <h3 className="text-2xl font-bold text-orange mb-4">Social Content</h3>
               <p className="text-gray-300 mb-6">
                 Follow us on Instagram for quick, engaging posts about fascinating physics
                 phenomena and discoveries.
               </p>
               <a
                 href="https://www.instagram.com/bits_phyassoc/"
-                className="text-accent hover:text-red-600 transition-colors font-semibold"
+                className="text-orange hover:text-orange/80 transition-colors font-semibold"
               >
                 Follow Us →
               </a>
             </div>
 
-            <div className="bg-dark-secondary p-8 rounded-lg">
-              <h3 className="text-2xl font-bold text-accent mb-4">Events & Talks</h3>
+            <div className="bg-prussian/30 backdrop-blur-sm p-8 rounded-lg border border-prussian">
+              <h3 className="text-2xl font-bold text-orange mb-4">Events & Talks</h3>
               <p className="text-gray-300 mb-6">
                 We organize seminars, talks, and interactive sessions with experts in the field
                 of physics.
               </p>
-              <Link href="/" className="text-accent hover:text-red-600 transition-colors font-semibold">
+              <Link href="/" className="text-orange hover:text-orange/80 transition-colors font-semibold">
                 Learn More →
               </Link>
             </div>
@@ -146,7 +146,7 @@ export default function About() {
       </section>
 
       {/* Connect Section */}
-      <section className="py-20 bg-dark-secondary">
+      <section className="py-20 bg-prussian/20 backdrop-blur-sm">
         <div className="container mx-auto px-4 text-center">
           <h2 className="text-4xl font-bold text-white mb-6">Connect With Us</h2>
           <p className="text-gray-300 text-lg mb-12 max-w-2xl mx-auto">
@@ -156,25 +156,25 @@ export default function About() {
           <div className="flex justify-center gap-6 flex-wrap">
             <a
               href="https://www.facebook.com/Physics.Association.BITSPilani/"
-              className="bg-accent hover:bg-red-600 text-white font-bold py-3 px-8 rounded-lg transition-colors"
+              className="bg-orange hover:bg-orange/80 text-white font-bold py-3 px-8 rounded-lg transition-colors"
             >
               Facebook
             </a>
             <a
               href="https://www.instagram.com/bits_phyassoc/"
-              className="bg-accent hover:bg-red-600 text-white font-bold py-3 px-8 rounded-lg transition-colors"
+              className="bg-orange hover:bg-orange/80 text-white font-bold py-3 px-8 rounded-lg transition-colors"
             >
               Instagram
             </a>
             <a
               href="https://www.linkedin.com/company/physicsassociationbitspilani"
-              className="bg-accent hover:bg-red-600 text-white font-bold py-3 px-8 rounded-lg transition-colors"
+              className="bg-orange hover:bg-orange/80 text-white font-bold py-3 px-8 rounded-lg transition-colors"
             >
               LinkedIn
             </a>
             <a
               href="https://www.youtube.com/channel/UCh81x2kZQHc64xVwWAmCKWQ"
-              className="bg-accent hover:bg-red-600 text-white font-bold py-3 px-8 rounded-lg transition-colors"
+              className="bg-orange hover:bg-orange/80 text-white font-bold py-3 px-8 rounded-lg transition-colors"
             >
               YouTube
             </a>
