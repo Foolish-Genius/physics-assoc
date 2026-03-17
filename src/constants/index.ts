@@ -27,7 +27,7 @@ export const socialLinks = [
 export const navigationLinks = [
   { label: 'Home', href: '/' },
   { label: 'About Us', href: '/about' },
-  { label: 'Blog', href: 'https://bitsphyassoc.github.io/blog' },
+  { label: 'Blog', href: '/blog' },
   { label: 'Short Posts', href: 'https://www.instagram.com/bits_phyassoc/' },
 ];
 
