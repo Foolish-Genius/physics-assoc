@@ -62,7 +62,7 @@ export default function Home() {
           <div className="flex justify-between items-start mb-12">
             <SectionHeading title="Featured Articles" />
             <Link
-              href="https://bitsphyassoc.github.io/blog/"
+              href="/blog"
               className="text-orange hover:text-orange/80 transition-colors font-semibold whitespace-nowrap mt-4"
             >
               Go to Blog →

@@ -34,12 +34,12 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
-                <a
-                  href="https://bitsphyassoc.github.io/blog"
+                <Link
+                  href="/blog"
                   className="text-alabaster hover:text-orange transition-colors"
                 >
                   Blog
-                </a>
+                </Link>
               </li>
             </ul>
           </div>
