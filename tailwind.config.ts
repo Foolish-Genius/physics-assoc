@@ -40,6 +40,11 @@ const config: Config = {
         display: ['"Playfair Display"', 'serif'],
         body: ['"Inter"', 'sans-serif'],
         mono: ['"JetBrains Mono"', 'monospace'],
+        marker: ['"Permanent Marker"', 'cursive'],
+        bungee: ['"Bungee"', 'cursive'],
+        lobster: ['"Lobster Two"', 'cursive'],
+        luckiest: ['"Luckiest Guy"', 'cursive'],
+        yanone: ['"Yanone Kaffeesatz"', 'sans-serif'],
         poppins: ['"Inter"', 'sans-serif'],
       },
       fontSize: {

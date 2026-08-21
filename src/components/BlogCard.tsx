@@ -21,12 +21,12 @@ export default function BlogCard({ article }: BlogCardProps) {
       )}
       <div className="flex-1 flex flex-col justify-center">
         <div className="flex flex-wrap items-center gap-x-4 gap-y-2 mb-4">
-          <span className="text-[0.65rem] uppercase tracking-[0.2em] font-semibold text-accent">{article.author}</span>
+          <span className="text-xl uppercase tracking-[0.1em] font-yanone text-accent">{article.author}</span>
           <span className="text-xs text-text-muted">•</span>
-          <span className="text-[0.65rem] text-text-muted uppercase tracking-[0.2em]">{formattedDate}</span>
+          <span className="text-xl text-text-muted font-yanone uppercase tracking-[0.1em]">{formattedDate}</span>
         </div>
         <Link href={`/blog/${article.slug}`}>
-          <h3 className="text-3xl text-text mb-4 font-medium group-hover:text-accent transition-colors leading-snug" style={{ fontFamily: '"Playfair Display", serif' }}>
+          <h3 className="text-4xl text-text mb-4 font-display group-hover:text-accent transition-colors leading-tight">
             {article.title}
           </h3>
         </Link>
@@ -34,7 +34,7 @@ export default function BlogCard({ article }: BlogCardProps) {
         {article.tags && article.tags.length > 0 && (
           <div className="flex flex-wrap gap-2 mt-auto">
             {article.tags.slice(0, 3).map((tag) => (
-               <span key={tag} className="text-[0.65rem] font-bold uppercase tracking-[0.1em] px-2 py-1 bg-border/20 text-text-muted border border-border">
+               <span key={tag} className="text-lg font-yanone uppercase tracking-[0.1em] px-2 py-0 bg-border/20 text-text-muted border border-border">
                  {tag}
                </span>
             ))}

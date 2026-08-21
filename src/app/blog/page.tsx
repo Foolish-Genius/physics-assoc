@@ -49,10 +49,10 @@ export default function BlogPage() {
               <input type="text" placeholder="Search articles..." value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} className="w-full px-4 py-3 text-sm outline-none transition-colors border rounded bg-bg text-text focus:border-accent" style={{ borderColor: 'var(--border)' }} />
             </div>
             <div className="flex flex-wrap gap-2 items-center">
-              <span className="text-[0.65rem] uppercase tracking-[0.2em] text-text-dim font-semibold mr-2">Tags:</span>
-              <button onClick={() => setSelectedTag(null)} className="text-[0.65rem] font-bold uppercase tracking-[0.1em] px-3 py-1.5 transition-colors border" style={{ background: selectedTag === null ? 'var(--accent)' : 'transparent', color: selectedTag === null ? 'var(--bg)' : 'var(--text-dim)', borderColor: selectedTag === null ? 'var(--accent)' : 'var(--border)' }}>All</button>
+              <span className="text-xl uppercase tracking-[0.1em] font-yanone text-text-dim mr-2">Tags:</span>
+              <button onClick={() => setSelectedTag(null)} className="text-lg font-yanone uppercase tracking-[0.1em] px-3 py-1 transition-colors border" style={{ background: selectedTag === null ? 'var(--accent)' : 'transparent', color: selectedTag === null ? 'var(--bg)' : 'var(--text-dim)', borderColor: selectedTag === null ? 'var(--accent)' : 'var(--border)' }}>All</button>
               {allTags.map((tag) => (
-                <button key={tag} onClick={() => setSelectedTag(tag === selectedTag ? null : tag)} className="text-[0.65rem] font-bold uppercase tracking-[0.1em] px-3 py-1.5 transition-colors border" style={{ background: selectedTag === tag ? 'var(--accent)' : 'transparent', color: selectedTag === tag ? 'var(--bg)' : 'var(--text-dim)', borderColor: selectedTag === tag ? 'var(--accent)' : 'var(--border)' }}>{tag}</button>
+                <button key={tag} onClick={() => setSelectedTag(tag === selectedTag ? null : tag)} className="text-lg font-yanone uppercase tracking-[0.1em] px-3 py-1 transition-colors border" style={{ background: selectedTag === tag ? 'var(--accent)' : 'transparent', color: selectedTag === tag ? 'var(--bg)' : 'var(--text-dim)', borderColor: selectedTag === tag ? 'var(--accent)' : 'var(--border)' }}>{tag}</button>
               ))}
             </div>
           </div>
@@ -62,7 +62,7 @@ export default function BlogPage() {
             <div className="space-y-8">{filteredArticles.map((article) => <BlogCard key={article.id} article={article} />)}</div>
           ) : (
             <div className="text-center py-24 border bg-bg-surface" style={{ borderColor: 'var(--border)' }}>
-              <h3 className="text-2xl text-text font-medium mb-4" style={{ fontFamily: '"Playfair Display", serif' }}>No articles found</h3>
+              <h3 className="text-4xl text-text font-display mb-4">No articles found</h3>
               <p className="text-text-dim">Try adjusting your search query.</p>
             </div>
           )}

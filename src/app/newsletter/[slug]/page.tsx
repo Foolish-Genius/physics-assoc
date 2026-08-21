@@ -31,17 +31,17 @@ export default function NewsletterViewerPage() {
   }
 
   if (loading) return <div className="min-h-screen flex items-center justify-center"><div className="text-sm font-semibold tracking-widest uppercase text-text-muted">Searching Archives...</div></div>;
-  if (notFound || !newsletter) return <div className="min-h-screen flex flex-col items-center justify-center"><h1 className="text-4xl text-text mb-4 font-semibold" style={{ fontFamily: '"Playfair Display", serif' }}>Not Found</h1><button onClick={() => router.push('/newsletter')} className="btn-accent">Return</button></div>;
+  if (notFound || !newsletter) return <div className="min-h-screen flex flex-col items-center justify-center"><h1 className="text-5xl text-text mb-4 font-display">Not Found</h1><button onClick={() => router.push('/newsletter')} className="btn-accent">Return</button></div>;
 
   return (
     <div className="min-h-screen pt-16 pb-24 bg-transparent">
       <div className="container mx-auto px-5 md:px-8 relative z-10">
         <div className="max-w-[1000px] mx-auto mb-16 text-center">
-          <button onClick={() => router.push('/newsletter')} className="text-[0.7rem] font-bold uppercase tracking-[0.15em] text-text-muted hover:text-accent transition-colors mb-12 inline-flex items-center gap-2"><span>←</span> Back to Newsletters</button>
+          <button onClick={() => router.push('/newsletter')} className="text-xl font-yanone uppercase tracking-[0.1em] text-text-muted hover:text-accent transition-colors mb-12 inline-flex items-center gap-2"><span>←</span> Back to Newsletters</button>
           <div className="mb-6">
-            {newsletter.issue && <span className="text-[0.7rem] font-bold uppercase tracking-[0.15em] text-accent border border-accent/30 px-3 py-1">{newsletter.issue}</span>}
+            {newsletter.issue && <span className="text-xl font-yanone uppercase tracking-[0.1em] text-accent border border-accent/30 px-3 py-1">{newsletter.issue}</span>}
           </div>
-          <h1 className="text-4xl md:text-6xl text-text mb-8 font-medium leading-[1.1]" style={{ fontFamily: '"Playfair Display", serif' }}>{newsletter.title}</h1>
+          <h1 className="text-4xl md:text-6xl text-text mb-8 font-display leading-[1.1]">{newsletter.title}</h1>
           {newsletter.description && <p className="text-lg text-text-dim mt-4 max-w-2xl mx-auto leading-relaxed">{newsletter.description}</p>}
         </div>
         <div className="max-w-[1200px] mx-auto border p-4 md:p-12 bg-bg-surface" style={{ borderColor: 'var(--border)' }}>

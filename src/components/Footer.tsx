@@ -12,7 +12,7 @@ export default function Footer() {
       <div className="max-w-[1400px] mx-auto px-5 md:px-8">
         <div className="grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-8 py-16">
           <div className="md:col-span-5">
-            <h3 className="text-2xl font-semibold mb-4" style={{ fontFamily: '"Playfair Display", serif', color: 'var(--text)' }}>
+            <h3 className="text-4xl font-yanone mb-4" style={{ color: 'var(--text)' }}>
               Physics Association
             </h3>
             <p className="text-text-dim mt-2 leading-relaxed max-w-sm">
@@ -21,7 +21,7 @@ export default function Footer() {
             </p>
           </div>
           <div className="md:col-span-3 md:col-start-7">
-            <p className="text-sm uppercase tracking-wider font-semibold text-text mb-4">Navigate</p>
+            <p className="text-2xl uppercase tracking-wider font-yanone text-text mb-4">Navigate</p>
             <ul className="space-y-3">
               {[{ label: 'Home', href: '/' }, { label: 'About', href: '/about' }, { label: 'Blog', href: '/blog' }, { label: 'Newsletter', href: '/newsletter' }].map((item) => (
                 <li key={item.label}>
@@ -31,7 +31,7 @@ export default function Footer() {
             </ul>
           </div>
           <div className="md:col-span-3">
-            <p className="text-sm uppercase tracking-wider font-semibold text-text mb-4">Connect</p>
+            <p className="text-2xl uppercase tracking-wider font-yanone text-text mb-4">Connect</p>
             <div className="flex flex-wrap gap-4">
               {socialLinks.map((social) => {
                 const Icon = social.icon;

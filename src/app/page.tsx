@@ -14,17 +14,18 @@ export default function Home() {
         <div className="max-w-[1400px] mx-auto px-5 md:px-8">
           
           <div className="mb-6">
-            <span className="text-[0.7rem] font-bold uppercase tracking-[0.15em] text-accent">
+            <span className="text-xl uppercase tracking-[0.2em] text-accent font-yanone">
               About
             </span>
           </div>
 
           <div className="max-w-4xl">
             <h1 
-              className="text-[4rem] md:text-[6.5rem] text-text leading-[1.05] tracking-tight font-medium" 
-              style={{ fontFamily: '"Playfair Display", serif' }}
+              className="text-[4rem] md:text-[6.5rem] text-text leading-[1.05] tracking-tight font-medium font-display" 
             >
-              Promoting the beautiful language of <span className="text-accent italic font-light">physics</span>
+              Promoting the beautiful language of <br className="hidden md:block"/>
+              <span className="text-accent font-lobster text-[5rem] md:text-[8rem] lowercase leading-[0.7] inline-block -rotate-2 transform">physics</span>
+              <span className="font-marker text-accent2 text-3xl md:text-5xl absolute mt-4 md:mt-8 ml-2 rotate-12 inline-block">!</span>
             </h1>
           </div>
           
@@ -44,7 +45,7 @@ export default function Home() {
             <div className="flex flex-col">
               
               <div className="flex items-center gap-4 mb-10">
-                <span className="text-[0.7rem] font-bold uppercase tracking-[0.15em] text-accent">
+                <span className="text-2xl uppercase tracking-[0.2em] text-accent font-yanone">
                   Mission
                 </span>
                 <div className="flex-1 h-px bg-border max-w-xs" />
@@ -100,14 +101,11 @@ export default function Home() {
           
           <div className="flex flex-col sm:flex-row items-center justify-between gap-6 mb-16">
             <div className="flex items-center gap-4">
-              <span className="text-[0.7rem] font-bold uppercase tracking-[0.15em] text-accent">
+              <span className="text-2xl uppercase tracking-[0.2em] text-accent font-yanone">
                 Latest
               </span>
               <div className="w-12 h-px bg-border" />
-              <h2 
-                className="text-3xl text-text font-medium" 
-                style={{ fontFamily: '"Playfair Display", serif' }}
-              >
+              <h2 className="text-4xl text-text font-medium font-display">
                 Featured Articles
               </h2>
             </div>

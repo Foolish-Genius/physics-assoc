@@ -40,8 +40,7 @@ export default function Header() {
           {/* Left: Logo */}
           <Link href="/" className="flex items-baseline gap-2 group w-1/4">
             <span
-              className="text-2xl md:text-3xl font-medium tracking-tight transition-colors group-hover:text-accent"
-              style={{ fontFamily: '"Playfair Display", serif' }}
+              className="text-3xl md:text-5xl tracking-wide transition-colors group-hover:text-accent font-yanone"
             >
               Physics
             </span>

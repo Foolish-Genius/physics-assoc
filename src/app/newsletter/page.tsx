@@ -30,10 +30,10 @@ export default function NewsletterPage() {
     <main className="min-h-screen bg-transparent">
       <section className="pt-16 pb-24 border-b" style={{ borderColor: 'var(--border)' }}>
         <div className="max-w-[1400px] mx-auto px-5 md:px-8">
-          <div className="mb-6"><span className="text-[0.7rem] font-bold uppercase tracking-[0.15em] text-accent">Archive</span></div>
+          <div className="mb-6"><span className="text-xl uppercase tracking-[0.2em] font-yanone text-accent">Archive</span></div>
           <div className="max-w-4xl">
-            <h1 className="text-[4rem] md:text-[6.5rem] text-text leading-[1.05] tracking-tight font-medium" style={{ fontFamily: '"Playfair Display", serif' }}>
-              The <span className="italic text-accent font-light">Newsletter</span>
+            <h1 className="text-[4rem] md:text-[6.5rem] text-text leading-[1.05] tracking-tight font-display">
+              The <span className="font-lobster text-accent lowercase text-[5rem] md:text-[8rem] inline-block transform -rotate-2">Newsletter</span>
             </h1>
             <p className="text-lg md:text-xl text-text-dim leading-relaxed mt-8 max-w-2xl">
               Read our beautifully crafted physics newsletters. Download the PDFs or read them directly in your browser.
@@ -44,7 +44,7 @@ export default function NewsletterPage() {
 
       <section className="py-24" style={{ background: 'var(--bg-raised)' }}>
         <div className="max-w-[1400px] mx-auto px-5 md:px-8">
-          <div className="mb-16 flex items-center gap-4"><span className="text-[0.7rem] font-bold uppercase tracking-[0.15em] text-accent">Past Issues</span><div className="w-12 h-px bg-border" /></div>
+          <div className="mb-16 flex items-center gap-4"><span className="text-2xl font-yanone uppercase tracking-[0.2em] text-accent">Past Issues</span><div className="w-12 h-px bg-border" /></div>
           {loading ? (
              <div className="space-y-6">{[1, 2, 3].map((i) => <div key={i} className="h-40 border bg-bg-surface animate-pulse" style={{ borderColor: 'var(--border)' }} />)}</div>
           ) : newsletters.length > 0 ? (
@@ -52,27 +52,27 @@ export default function NewsletterPage() {
               {newsletters.map((newsletter, i) => (
                 <div key={newsletter.id} className="p-8 border bg-bg-surface hover:border-accent transition-all duration-300 flex flex-col" style={{ borderColor: 'var(--border)' }}>
                   <div className="flex justify-between items-start mb-6">
-                    <span className="text-[0.65rem] uppercase tracking-[0.2em] font-semibold text-accent">{newsletter.issue || `Issue #${newsletters.length - i}`}</span>
-                    <span className="text-[0.65rem] text-text-muted font-mono uppercase tracking-[0.1em]">
+                    <span className="text-xl font-yanone uppercase tracking-[0.1em] text-accent">{newsletter.issue || `Issue #${newsletters.length - i}`}</span>
+                    <span className="text-lg text-text-muted font-yanone uppercase tracking-[0.1em]">
                       {new Date(newsletter.created_at).toLocaleDateString('en-US', { month: 'short', year: 'numeric' })}
                     </span>
                   </div>
                   <Link href={`/newsletter/${newsletter.slug}`}>
-                    <h3 className="text-3xl text-text mb-4 hover:text-accent transition-colors font-medium leading-snug" style={{ fontFamily: '"Playfair Display", serif' }}>
+                    <h3 className="text-4xl text-text mb-4 hover:text-accent transition-colors font-display leading-tight">
                       {newsletter.title}
                     </h3>
                   </Link>
                   <p className="text-[0.95rem] text-text-dim mb-10 line-clamp-2 leading-relaxed">{newsletter.description}</p>
                   <div className="flex items-center justify-between mt-auto border-t pt-6" style={{ borderColor: 'var(--border)' }}>
-                    <Link href={`/newsletter/${newsletter.slug}`} className="text-[0.7rem] font-bold uppercase tracking-[0.15em] text-text hover:text-accent transition-colors">Read Now →</Link>
-                    <a href={newsletter.file_url} download className="text-[0.65rem] font-mono font-bold tracking-[0.1em] text-text-muted hover:text-accent transition-colors uppercase">PDF ({formatBytes(newsletter.file_size_bytes)})</a>
+                    <Link href={`/newsletter/${newsletter.slug}`} className="text-xl font-yanone uppercase tracking-[0.1em] text-text hover:text-accent transition-colors">Read Now →</Link>
+                    <a href={newsletter.file_url} download className="text-lg font-yanone tracking-[0.1em] text-text-muted hover:text-accent transition-colors uppercase">PDF ({formatBytes(newsletter.file_size_bytes)})</a>
                   </div>
                 </div>
               ))}
             </div>
           ) : (
             <div className="text-center py-24 border bg-bg-surface" style={{ borderColor: 'var(--border)' }}>
-              <h3 className="text-2xl text-text font-medium mb-4" style={{ fontFamily: '"Playfair Display", serif' }}>No newsletters available</h3>
+              <h3 className="text-4xl text-text font-display mb-4">No newsletters available</h3>
               <p className="text-text-dim">We're currently working on our first issue.</p>
             </div>
           )}
