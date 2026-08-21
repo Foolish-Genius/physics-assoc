@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import './globals.css';
+import { Toaster } from 'react-hot-toast';
 import { Header, Footer, ParticleBackground } from '@/components';
 
 export const metadata: Metadata = {
@@ -45,6 +46,19 @@ export default function RootLayout({
         />
       </head>
       <body className="bg-black text-white font-poppins antialiased">
+        <Toaster
+          position="top-right"
+          containerStyle={{ top: 90, zIndex: 9999 }}
+          toastOptions={{
+            duration: 4500,
+            style: {
+              background: '#14213d',
+              color: '#fff',
+              border: '1px solid rgba(252, 163, 17, 0.3)',
+              maxWidth: '420px',
+            },
+          }}
+        />
         <ParticleBackground />
         <Header />
         <main className="min-h-screen relative z-10">{children}</main>

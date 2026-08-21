@@ -28,6 +28,7 @@ export const navigationLinks = [
   { label: 'Home', href: '/' },
   { label: 'About Us', href: '/about' },
   { label: 'Blog', href: '/blog' },
+  { label: 'Newsletter', href: '/newsletter' },
   { label: 'Short Posts', href: 'https://www.instagram.com/bits_phyassoc/' },
 ];
 
