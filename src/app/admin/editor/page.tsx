@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { supabase } from '@/lib/supabase';
 import MarkdownRenderer from '@/components/MarkdownRenderer';
-import toast, { Toaster } from 'react-hot-toast';
+import toast from 'react-hot-toast';
 
 export default function ArticleEditorPage() {
   const router = useRouter();
@@ -100,17 +100,6 @@ export default function ArticleEditorPage() {
 
   return (
     <>
-      <Toaster
-        position="top-right"
-        toastOptions={{
-          style: {
-            background: '#14213d',
-            color: '#fff',
-            border: '1px solid rgba(252, 163, 17, 0.3)',
-          },
-        }}
-      />
-
       <div className="min-h-screen pt-8 pb-20">
         <div className="container mx-auto px-4 max-w-5xl">
           {/* Header */}
@@ -255,7 +244,7 @@ export default function ArticleEditorPage() {
                 {/* Content */}
                 <div>
                   <label htmlFor="content" className="block text-sm font-medium text-gray-400 mb-2">
-                    Content * <span className="text-gray-600">(Markdown supported)</span>
+                    Content * <span className="text-gray-600">(Markdown + LaTeX supported: $inline$ or $$block$$)</span>
                   </label>
                   <textarea
                     id="content"

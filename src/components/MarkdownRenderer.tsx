@@ -3,10 +3,31 @@
 import React from 'react';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
+import remarkMath from 'remark-math';
+import rehypeKatex from 'rehype-katex';
+import 'katex/dist/katex.min.css';
 
 interface MarkdownRendererProps {
   content: string;
 }
+
+// Don't let a typo in an author's equation take down the whole article render.
+const katexOptions = {
+  throwOnError: false,
+  errorColor: '#fca311',
+  strict: false,
+  trust: false,
+  macros: {
+    // Common physics shorthand not built into KaTeX by default
+    '\\dd': '\\mathrm{d}',
+    '\\vb': '\\mathbf{#1}',
+    '\\abs': '\\left|#1\\right|',
+    '\\ket': '\\left|#1\\right\\rangle',
+    '\\bra': '\\left\\langle#1\\right|',
+    '\\braket': '\\left\\langle#1\\middle|#2\\right\\rangle',
+    '\\expval': '\\left\\langle#1\\right\\rangle',
+  },
+};
 
 export default function MarkdownRenderer({ content }: MarkdownRendererProps) {
   return (
@@ -27,8 +48,13 @@ export default function MarkdownRenderer({ content }: MarkdownRendererProps) {
       prose-img:rounded-xl prose-img:border prose-img:border-prussian/50
       prose-hr:border-prussian
       prose-table:border-prussian prose-th:text-orange prose-th:border-prussian prose-td:border-prussian
+      [&_.katex]:text-gray-100
+      [&_.katex-display]:overflow-x-auto [&_.katex-display]:overflow-y-hidden [&_.katex-display]:py-2
     ">
-      <ReactMarkdown remarkPlugins={[remarkGfm]}>
+      <ReactMarkdown
+        remarkPlugins={[remarkGfm, remarkMath]}
+        rehypePlugins={[[rehypeKatex, katexOptions]]}
+      >
         {content}
       </ReactMarkdown>
     </div>
