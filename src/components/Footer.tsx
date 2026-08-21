@@ -1,3 +1,5 @@
+'use client';
+
 import React from 'react';
 import { socialLinks } from '@/constants';
 import Link from 'next/link';
@@ -6,59 +8,35 @@ export default function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="bg-prussian/50 backdrop-blur-sm border-t border-prussian relative z-10">
-      <div className="container mx-auto px-4 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
-          {/* About */}
-          <div>
-            <h3 className="text-xl font-bold text-white mb-4">
-              <span className="text-orange">Physics</span> Association
+    <footer className="relative z-10 border-t" style={{ background: 'var(--bg-surface)', borderColor: 'var(--border)', backdropFilter: 'blur(12px)' }}>
+      <div className="max-w-[1400px] mx-auto px-5 md:px-8">
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-8 py-16">
+          <div className="md:col-span-5">
+            <h3 className="text-2xl font-semibold mb-4" style={{ fontFamily: '"Playfair Display", serif', color: 'var(--text)' }}>
+              Physics Association
             </h3>
-            <p className="text-gray-400">
-              Promoting the beautiful language of physics at BITS Pilani
+            <p className="text-text-dim mt-2 leading-relaxed max-w-sm">
+              Promoting the beautiful language of physics at BITS Pilani.
+              A community of passionate students exploring the universe.
             </p>
           </div>
-
-          {/* Quick Links */}
-          <div>
-            <h4 className="text-lg font-bold text-white mb-4">Quick Links</h4>
-            <ul className="space-y-2">
-              <li>
-                <Link href="/" className="text-alabaster hover:text-orange transition-colors">
-                  Home
-                </Link>
-              </li>
-              <li>
-                <Link href="/about" className="text-alabaster hover:text-orange transition-colors">
-                  About Us
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/blog"
-                  className="text-alabaster hover:text-orange transition-colors"
-                >
-                  Blog
-                </Link>
-              </li>
+          <div className="md:col-span-3 md:col-start-7">
+            <p className="text-sm uppercase tracking-wider font-semibold text-text mb-4">Navigate</p>
+            <ul className="space-y-3">
+              {[{ label: 'Home', href: '/' }, { label: 'About', href: '/about' }, { label: 'Blog', href: '/blog' }, { label: 'Newsletter', href: '/newsletter' }].map((item) => (
+                <li key={item.label}>
+                  <Link href={item.href} className="text-text-dim hover:text-accent transition-colors text-sm">{item.label}</Link>
+                </li>
+              ))}
             </ul>
           </div>
-
-          {/* Social Links */}
-          <div>
-            <h4 className="text-lg font-bold text-white mb-4">Follow Us</h4>
-            <div className="flex gap-4">
+          <div className="md:col-span-3">
+            <p className="text-sm uppercase tracking-wider font-semibold text-text mb-4">Connect</p>
+            <div className="flex flex-wrap gap-4">
               {socialLinks.map((social) => {
                 const Icon = social.icon;
                 return (
-                  <a
-                    key={social.name}
-                    href={social.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-alabaster hover:text-orange transition-colors text-2xl"
-                    aria-label={social.name}
-                  >
+                  <a key={social.name} href={social.url} target="_blank" rel="noopener noreferrer" className="w-10 h-10 flex items-center justify-center text-xl transition-colors rounded border border-border text-text-dim hover:text-accent hover:border-accent bg-transparent">
                     <Icon />
                   </a>
                 );
@@ -66,12 +44,9 @@ export default function Footer() {
             </div>
           </div>
         </div>
-
-        {/* Bottom */}
-        <div className="border-t border-gray-700 pt-8 text-center text-gray-500">
-          <p>
-            &copy; {currentYear} BITS Pilani Physics Association. All rights reserved.
-          </p>
+        <div className="py-6 flex flex-col sm:flex-row justify-between items-center gap-4 text-center text-sm text-text-muted border-t" style={{ borderColor: 'var(--rule)' }}>
+          <p>© {currentYear} Physics Association, BITS Pilani. All rights reserved.</p>
+          <p>Designed with <span style={{ color: 'var(--accent3)' }}>♥</span> for science.</p>
         </div>
       </div>
     </footer>
