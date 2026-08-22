@@ -1,183 +1,79 @@
-import { SectionHeading } from '@/components';
 import Image from 'next/image';
 import Link from 'next/link';
 
 export const metadata = {
   title: 'About Us - Physics Association | BITS Pilani',
-  description:
-    'Learn more about the Physics Association at BITS Pilani, our mission, and our team of passionate physics enthusiasts.',
 };
 
 export default function About() {
-  const teamValues = [
-    {
-      title: 'Innovation',
-      description:
-        'We push the boundaries of physics education through modern content and engaging discussions.',
-    },
-    {
-      title: 'Community',
-      description:
-        'Building a vibrant community of physics enthusiasts at BITS Pilani.',
-    },
-    {
-      title: 'Excellence',
-      description:
-        'Striving for the highest quality in our articles, events, and interactions.',
-    },
-    {
-      title: 'Accessibility',
-      description:
-        'Making complex physics concepts accessible to everyone, regardless of background.',
-    },
+  const values = [
+    { num: '01', title: 'Innovation', text: 'Pushing the boundaries of physics education through modern content and engaging discussions.' },
+    { num: '02', title: 'Community', text: 'Building a vibrant community of physics enthusiasts at BITS Pilani.' },
+    { num: '03', title: 'Excellence', text: 'Striving for the highest quality in our articles, events, and interactions.' },
+    { num: '04', title: 'Accessibility', text: 'Making complex physics concepts accessible to everyone, regardless of background.' },
+  ];
+
+  const offerings = [
+    { title: 'Blog Articles', text: 'In-depth articles covering quantum mechanics to cosmology.', link: '/blog', linkLabel: 'Read Articles', color: 'var(--accent)' },
+    { title: 'Social Content', text: 'Engaging Instagram posts about fascinating physics phenomena.', link: 'https://www.instagram.com/bits_phyassoc/', linkLabel: 'Follow Us', external: true, color: 'var(--accent2)' },
+    { title: 'Events & Talks', text: 'Seminars and interactive sessions with experts in physics.', link: '/', linkLabel: 'Learn More', color: 'var(--accent3)' },
   ];
 
   return (
     <main className="min-h-screen">
-      {/* Hero Section */}
-      <section className="py-20 bg-gradient-to-br from-prussian to-black">
-        <div className="container mx-auto px-4">
-          <h1 className="text-5xl md:text-6xl font-bold text-white mb-6">
-            About <span className="text-orange">Physics</span> Association
+      <section className="relative overflow-hidden flex items-center" style={{ minHeight: '40vh', background: 'transparent' }}>
+        <div className="relative z-10 max-w-[1400px] mx-auto px-5 md:px-8 w-full">
+          <div className="mb-6"><span className="text-xl font-yanone uppercase tracking-[0.2em] text-accent">About Us</span></div>
+          <h1 className="text-4xl md:text-6xl text-text leading-tight font-display">
+            Promoting the beautiful language of <span className="text-accent font-lobster text-[4.5rem] md:text-[7rem] lowercase leading-[0.7] inline-block transform -rotate-2">physics</span>
+            <span className="font-marker text-accent2 text-2xl md:text-4xl absolute mt-4 md:mt-8 ml-2 rotate-12 inline-block">!</span>
           </h1>
-          <p className="text-xl text-gray-400 max-w-2xl">
-            Promoting the beautiful language of physics at BITS Pilani
-          </p>
         </div>
       </section>
 
-      {/* Mission Section */}
-      <section className="py-20 bg-transparent">
-        <div className="container mx-auto px-4">
-          <div className="grid md:grid-cols-2 gap-12 items-center">
-            <div>
-              <h2 className="text-4xl font-bold text-white mb-6">Our Mission</h2>
-              <p className="text-gray-300 text-lg leading-relaxed mb-6">
-                We are a bunch of passionate nerds trying to promote the beautiful language of
-                physics in all of its true glory. Our mission is to bridge the gap between
-                complex physics concepts and everyday understanding.
-              </p>
-              <p className="text-gray-300 text-lg leading-relaxed mb-6">
-                Based at BITS Pilani, we provide quality content through our blog, engaging
-                Instagram posts, and interactive events that explain fascinating physics phenomena
-                in an accessible way.
-              </p>
-              <p className="text-gray-300 text-lg leading-relaxed">
-                Whether you're interested in quantum computing, cosmology, particle physics, or
-                any other field of physics, we have something for you!
-              </p>
-            </div>
-            <div className="relative h-96 rounded-lg overflow-hidden">
-              <Image
-                src="https://raw.githubusercontent.com/bitsphyassoc/bitsphyassoc.github.io/main/assets/images/feature-image.jpg"
-                alt="Our Team"
-                fill
-                className="object-cover"
-              />
+      <section className="py-24 border-t" style={{ background: 'var(--bg-surface)', borderColor: 'var(--border)' }}>
+        <div className="max-w-[1400px] mx-auto px-5 md:px-8">
+          <div className="grid md:grid-cols-2 gap-16 items-center">
+            <div className="order-2 md:order-1 relative h-[600px] w-full"><Image src="https://raw.githubusercontent.com/bitsphyassoc/bitsphyassoc.github.io/main/assets/images/feature-image.jpg" alt="Physics Association Team" fill className="object-cover grayscale hover:grayscale-0 transition-all duration-700" /></div>
+            <div className="order-1 md:order-2 flex flex-col">
+              <div className="flex items-center gap-4 mb-10"><span className="text-2xl font-yanone uppercase tracking-[0.2em] text-accent">Our Mission</span><div className="flex-1 h-px bg-border max-w-xs" /></div>
+              <div className="space-y-6 text-[1.1rem] text-text-dim leading-[1.8]"><p>We are a passionate group of students dedicated to promoting the beautiful language of physics in all of its true glory.</p><p>Based at BITS Pilani, we provide quality content through our blog, engaging social media posts, and interactive events designed to spark curiosity and wonder.</p></div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Values Section */}
-      <section className="py-20 bg-prussian/20 backdrop-blur-sm">
-        <div className="container mx-auto px-4">
-          <h2 className="text-4xl font-bold text-white mb-12 text-center">Our Values</h2>
+      <section className="py-24 border-t" style={{ background: 'transparent', borderColor: 'var(--border)' }}>
+        <div className="max-w-[1400px] mx-auto px-5 md:px-8">
+          <div className="mb-16 flex items-center gap-4"><span className="text-2xl font-yanone uppercase tracking-[0.2em] text-accent">Our Values</span><div className="w-12 h-px bg-border" /></div>
           <div className="grid md:grid-cols-2 gap-8">
-            {teamValues.map((value, index) => (
-              <div
-                key={index}
-                className="bg-prussian/30 backdrop-blur-sm p-8 rounded-lg border border-prussian hover:border-orange transition-colors"
-              >
-                <h3 className="text-2xl font-bold text-orange mb-4">{value.title}</h3>
-                <p className="text-gray-300 text-lg">{value.description}</p>
+            {values.map((v, i) => (
+              <div key={v.num} className="p-8 border bg-bg-surface transition-colors hover:border-accent" style={{ borderColor: 'var(--border)' }}>
+                <div className="flex items-start gap-6">
+                  <span className="text-5xl font-bungee" style={{ color: `var(--accent${i === 0 ? '' : i === 1 ? '2' : i === 2 ? '3' : ''})` }}>{v.num}</span>
+                  <div><h3 className="text-2xl font-display font-semibold text-text mb-2">{v.title}</h3><p className="text-text-dim leading-relaxed">{v.text}</p></div>
+                </div>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Content Section */}
-      <section className="py-20 bg-transparent">
-        <div className="container mx-auto px-4">
-          <h2 className="text-4xl font-bold text-white mb-12">What We Offer</h2>
-
-          <div className="grid md:grid-cols-3 gap-8 mb-12">
-            <div className="bg-prussian/30 backdrop-blur-sm p-8 rounded-lg border border-prussian">
-              <h3 className="text-2xl font-bold text-orange mb-4">Blog Articles</h3>
-              <p className="text-gray-300 mb-6">
-                In-depth articles covering various topics in physics, from quantum mechanics to
-                cosmology.
-              </p>
-              <Link
-                href="https://bitsphyassoc.github.io/blog"
-                className="text-orange hover:text-orange/80 transition-colors font-semibold"
-              >
-                Read Articles →
-              </Link>
-            </div>
-
-            <div className="bg-prussian/30 backdrop-blur-sm p-8 rounded-lg border border-prussian">
-              <h3 className="text-2xl font-bold text-orange mb-4">Social Content</h3>
-              <p className="text-gray-300 mb-6">
-                Follow us on Instagram for quick, engaging posts about fascinating physics
-                phenomena and discoveries.
-              </p>
-              <a
-                href="https://www.instagram.com/bits_phyassoc/"
-                className="text-orange hover:text-orange/80 transition-colors font-semibold"
-              >
-                Follow Us →
-              </a>
-            </div>
-
-            <div className="bg-prussian/30 backdrop-blur-sm p-8 rounded-lg border border-prussian">
-              <h3 className="text-2xl font-bold text-orange mb-4">Events & Talks</h3>
-              <p className="text-gray-300 mb-6">
-                We organize seminars, talks, and interactive sessions with experts in the field
-                of physics.
-              </p>
-              <Link href="/" className="text-orange hover:text-orange/80 transition-colors font-semibold">
-                Learn More →
-              </Link>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Connect Section */}
-      <section className="py-20 bg-prussian/20 backdrop-blur-sm">
-        <div className="container mx-auto px-4 text-center">
-          <h2 className="text-4xl font-bold text-white mb-6">Connect With Us</h2>
-          <p className="text-gray-300 text-lg mb-12 max-w-2xl mx-auto">
-            Follow us on social media for the latest updates, articles, and announcements about
-            our physics community.
-          </p>
-          <div className="flex justify-center gap-6 flex-wrap">
-            <a
-              href="https://www.facebook.com/Physics.Association.BITSPilani/"
-              className="bg-orange hover:bg-orange/80 text-white font-bold py-3 px-8 rounded-lg transition-colors"
-            >
-              Facebook
-            </a>
-            <a
-              href="https://www.instagram.com/bits_phyassoc/"
-              className="bg-orange hover:bg-orange/80 text-white font-bold py-3 px-8 rounded-lg transition-colors"
-            >
-              Instagram
-            </a>
-            <a
-              href="https://www.linkedin.com/company/physicsassociationbitspilani"
-              className="bg-orange hover:bg-orange/80 text-white font-bold py-3 px-8 rounded-lg transition-colors"
-            >
-              LinkedIn
-            </a>
-            <a
-              href="https://www.youtube.com/channel/UCh81x2kZQHc64xVwWAmCKWQ"
-              className="bg-orange hover:bg-orange/80 text-white font-bold py-3 px-8 rounded-lg transition-colors"
-            >
-              YouTube
-            </a>
+      <section className="py-24 border-t" style={{ background: 'var(--bg-surface)', borderColor: 'var(--border)' }}>
+        <div className="max-w-[1400px] mx-auto px-5 md:px-8">
+          <div className="mb-16 flex items-center gap-4"><span className="text-2xl font-yanone uppercase tracking-[0.2em] text-accent">What We Offer</span><div className="w-12 h-px bg-border" /></div>
+          <div className="grid md:grid-cols-3 gap-8">
+            {offerings.map((item, i) => (
+              <div key={i} className="p-8 border flex flex-col bg-bg-surface" style={{ borderColor: 'var(--border)' }}>
+                <h3 className="text-2xl font-display font-semibold text-text mb-4">{item.title}</h3>
+                <p className="text-text-dim mb-8 flex-1 leading-relaxed">{item.text}</p>
+                {item.external ? (
+                  <a href={item.link} target="_blank" rel="noopener noreferrer" className="text-xl font-yanone uppercase tracking-[0.15em] hover:text-accent transition-colors text-text">{item.linkLabel} →</a>
+                ) : (
+                  <Link href={item.link} className="text-xl font-yanone uppercase tracking-[0.15em] hover:text-accent transition-colors text-text">{item.linkLabel} →</Link>
+                )}
+              </div>
+            ))}
           </div>
         </div>
       </section>

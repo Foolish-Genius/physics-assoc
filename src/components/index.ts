@@ -7,5 +7,6 @@ import ParticleBackground from './ParticleBackground';
 import BlogCard from './BlogCard';
 import BlogHero from './BlogHero';
 import MarkdownRenderer from './MarkdownRenderer';
+import { ThemeProvider, useTheme } from './ThemeProvider';
 
-export { Header, Footer, Banner, ArticleCard, SectionHeading, ParticleBackground, BlogCard, BlogHero, MarkdownRenderer };
+export { Header, Footer, Banner, ArticleCard, SectionHeading, ParticleBackground, BlogCard, BlogHero, MarkdownRenderer, ThemeProvider, useTheme };

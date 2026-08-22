@@ -4,117 +4,80 @@ import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { supabase } from '@/lib/supabase';
 import { Newsletter } from '@/lib/types';
-import { formatBytes } from '@/lib/format';
 
-export default function NewsletterListPage() {
+export default function NewsletterPage() {
   const [newsletters, setNewsletters] = useState<Newsletter[]>([]);
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    fetchNewsletters();
-  }, []);
+  useEffect(() => { fetchNewsletters(); }, []);
 
   async function fetchNewsletters() {
-    const { data, error } = await supabase
-      .from('newsletters')
-      .select('*')
-      .eq('published', true)
-      .order('created_at', { ascending: false });
-
-    if (error) {
-      console.error('Error fetching newsletters:', error);
-      setLoading(false);
-      return;
-    }
-
+    const { data, error } = await supabase.from('newsletters').select('*').eq('published', true).order('created_at', { ascending: false });
+    if (error) { console.error(error); setLoading(false); return; }
     setNewsletters(data || []);
     setLoading(false);
   }
 
+  function formatBytes(bytes: number) {
+    if (bytes === 0) return '0 Bytes';
+    const k = 1024;
+    const sizes = ['Bytes', 'KB', 'MB', 'GB'];
+    const i = Math.floor(Math.log(bytes) / Math.log(k));
+    return parseFloat((bytes / Math.pow(k, i)).toFixed(1)) + ' ' + sizes[i];
+  }
+
   return (
-    <section className="py-20">
-      <div className="container mx-auto px-4 max-w-4xl">
-        <div className="text-center mb-14">
-          <h1 className="text-4xl md:text-5xl font-bold text-white mb-4">
-            <span className="text-orange">News</span>letter
-          </h1>
-          <p className="text-gray-400 max-w-2xl mx-auto">
-            Our periodic roundup of physics news, society updates, and member contributions —
-            read online or download the PDF.
-          </p>
+    <main className="min-h-screen bg-transparent">
+      <section className="pt-16 pb-24 border-b" style={{ borderColor: 'var(--border)' }}>
+        <div className="max-w-[1400px] mx-auto px-5 md:px-8">
+          <div className="mb-6"><span className="text-xl uppercase tracking-[0.2em] font-yanone text-accent">Archive</span></div>
+          <div className="max-w-4xl">
+            <h1 className="text-[4rem] md:text-[6.5rem] text-text leading-[1.05] tracking-tight font-display">
+              The <span className="font-lobster text-accent lowercase text-[5rem] md:text-[8rem] inline-block transform -rotate-2">Newsletter</span>
+            </h1>
+            <p className="text-lg md:text-xl text-text-dim leading-relaxed mt-8 max-w-2xl">
+              Read our beautifully crafted physics newsletters. Download the PDFs or read them directly in your browser.
+            </p>
+          </div>
         </div>
+      </section>
 
-        {loading ? (
-          <div className="space-y-4">
-            {[1, 2, 3].map((i) => (
-              <div key={i} className="bg-prussian/20 rounded-xl animate-pulse h-32 border border-prussian/30" />
-            ))}
-          </div>
-        ) : newsletters.length > 0 ? (
-          <div className="space-y-5">
-            {newsletters.map((n) => (
-              <div
-                key={n.id}
-                className="bg-prussian/20 backdrop-blur-sm rounded-2xl p-6 border border-prussian/50 hover:border-orange/30 transition-colors flex flex-col sm:flex-row sm:items-center gap-4"
-              >
-                <div className="flex-1 min-w-0">
-                  {n.issue && (
-                    <span className="text-xs font-semibold uppercase tracking-wide text-orange/80">
-                      {n.issue}
+      <section className="py-24" style={{ background: 'var(--bg-raised)' }}>
+        <div className="max-w-[1400px] mx-auto px-5 md:px-8">
+          <div className="mb-16 flex items-center gap-4"><span className="text-2xl font-yanone uppercase tracking-[0.2em] text-accent">Past Issues</span><div className="w-12 h-px bg-border" /></div>
+          {loading ? (
+             <div className="space-y-6">{[1, 2, 3].map((i) => <div key={i} className="h-40 border bg-bg-surface animate-pulse" style={{ borderColor: 'var(--border)' }} />)}</div>
+          ) : newsletters.length > 0 ? (
+            <div className="grid sm:grid-cols-2 gap-10">
+              {newsletters.map((newsletter, i) => (
+                <div key={newsletter.id} className="p-8 border bg-bg-surface hover:border-accent transition-all duration-300 flex flex-col" style={{ borderColor: 'var(--border)' }}>
+                  <div className="flex justify-between items-start mb-6">
+                    <span className="text-xl font-yanone uppercase tracking-[0.1em] text-accent">{newsletter.issue || `Issue #${newsletters.length - i}`}</span>
+                    <span className="text-lg text-text-muted font-yanone uppercase tracking-[0.1em]">
+                      {new Date(newsletter.created_at).toLocaleDateString('en-US', { month: 'short', year: 'numeric' })}
                     </span>
-                  )}
-                  <h2 className="text-xl font-bold text-white mt-1">{n.title}</h2>
-                  {n.description && (
-                    <p className="text-gray-400 text-sm mt-2 line-clamp-2">{n.description}</p>
-                  )}
-                  <p className="text-gray-600 text-xs mt-3">
-                    {new Date(n.created_at).toLocaleDateString('en-US', {
-                      year: 'numeric',
-                      month: 'short',
-                      day: 'numeric',
-                    })}
-                    {n.file_size_bytes > 0 && <> · {formatBytes(n.file_size_bytes)}</>}
-                  </p>
-                </div>
-
-                <div className="flex gap-3 flex-shrink-0">
-                  <Link
-                    href={`/newsletter/${n.slug}`}
-                    className="bg-orange hover:bg-orange/80 text-white font-bold py-2.5 px-5 rounded-lg transition-colors text-sm text-center"
-                  >
-                    Read Online
+                  </div>
+                  <Link href={`/newsletter/${newsletter.slug}`}>
+                    <h3 className="text-4xl text-text mb-4 hover:text-accent transition-colors font-display leading-tight">
+                      {newsletter.title}
+                    </h3>
                   </Link>
-                  <a
-                    href={n.file_url}
-                    download
-                    className="bg-prussian/40 hover:bg-prussian/60 text-gray-300 font-medium py-2.5 px-5 rounded-lg transition-colors border border-prussian/50 text-sm text-center"
-                  >
-                    Download
-                  </a>
+                  <p className="text-[0.95rem] text-text-dim mb-10 line-clamp-2 leading-relaxed">{newsletter.description}</p>
+                  <div className="flex items-center justify-between mt-auto border-t pt-6" style={{ borderColor: 'var(--border)' }}>
+                    <Link href={`/newsletter/${newsletter.slug}`} className="text-xl font-yanone uppercase tracking-[0.1em] text-text hover:text-accent transition-colors">Read Now →</Link>
+                    <a href={newsletter.file_url} download className="text-lg font-yanone tracking-[0.1em] text-text-muted hover:text-accent transition-colors uppercase">PDF ({formatBytes(newsletter.file_size_bytes)})</a>
+                  </div>
                 </div>
-              </div>
-            ))}
-          </div>
-        ) : (
-          <div className="text-center py-20">
-            <svg
-              className="w-20 h-20 mx-auto text-prussian mb-6"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={1}
-                d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z"
-              />
-            </svg>
-            <h3 className="text-2xl font-bold text-white mb-2">No newsletters yet</h3>
-            <p className="text-gray-500">Check back soon for our next issue!</p>
-          </div>
-        )}
-      </div>
-    </section>
+              ))}
+            </div>
+          ) : (
+            <div className="text-center py-24 border bg-bg-surface" style={{ borderColor: 'var(--border)' }}>
+              <h3 className="text-4xl text-text font-display mb-4">No newsletters available</h3>
+              <p className="text-text-dim">We're currently working on our first issue.</p>
+            </div>
+          )}
+        </div>
+      </section>
+    </main>
   );
 }

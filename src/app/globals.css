@@ -1,62 +1,299 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bungee&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Lobster+Two:ital,wght@0,400;0,700;1,400;1,700&family=Luckiest+Guy&family=Permanent+Marker&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&family=Yanone+Kaffeesatz:wght@400;500;600;700&display=swap');
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* Smooth scroll behavior */
-html {
-  scroll-behavior: smooth;
+/* ═══════════════════════════════════════════
+   DESIGN TOKENS — Formal, Editorial Identity
+   ═══════════════════════════════════════════ */
+
+:root {
+  /* Default Light/Cream Theme */
+  --bg: #fcf9f2; /* Cream body */
+  --bg-raised: transparent; /* Top hero section */
+  --bg-surface: rgba(255, 255, 255, 0.85); /* White sections (Mission) */
+  --text: #1a1a1a;
+  --text-dim: #4a4a4a;
+  --text-muted: #7a7a7a;
+  
+  --accent: #d84535; /* Coral from screenshot */
+  --accent-hover: #b83325;
+  --accent2: #1a9e8f; /* Teal */
+  --accent3: #e6940a; /* Amber */
+  
+  --border: rgba(0, 0, 0, 0.1);
+  --border-light: rgba(0, 0, 0, 0.05);
+  --rule: rgba(0, 0, 0, 0.08);
 }
 
-/* Custom scrollbar */
-::-webkit-scrollbar {
-  width: 10px;
-  height: 10px;
+.dark {
+  /* Dark Mode */
+  --bg: #0e0e0e; /* Pure dark body */
+  --bg-raised: transparent;
+  --bg-surface: rgba(26, 26, 26, 0.85); /* Dark gray sections */
+  --text: #faf8f3;
+  --text-dim: #d4cfc4;
+  --text-muted: #a3a3a3;
+  
+  --accent: #e8553d;
+  --accent-hover: #ff755e;
+  --accent2: #2bc4c4;
+  --accent3: #fdba74;
+  
+  --border: rgba(255, 255, 255, 0.15);
+  --border-light: rgba(255, 255, 255, 0.08);
+  --rule: rgba(255, 255, 255, 0.1);
 }
 
-::-webkit-scrollbar-track {
-  background: #000000;
+/* ═══════════════════════════════════════════
+   BASE
+   ═══════════════════════════════════════════ */
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Inter', system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  transition: background 0.3s ease, color 0.3s ease;
+  font-size: 1rem;
 }
 
-::-webkit-scrollbar-thumb {
-  background: #fca311;
-  border-radius: 5px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: #e59400;
-}
-
-/* Grid pattern background */
-.bg-grid-pattern {
-  background-image: linear-gradient(
-      90deg,
-      rgba(255, 255, 255, 0.05) 1px,
-      transparent 1px
-    ),
-    linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px);
-  background-size: 50px 50px;
-}
-
-/* Selection colors */
 ::selection {
-  background-color: #fca311;
-  color: #000;
+  background: var(--accent);
+  color: var(--bg);
 }
 
-/* Animations */
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+/* Scrollbar */
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: var(--accent); }
+
+/* ═══════════════════════════════════════════
+   LAYOUT PRIMITIVES
+   ═══════════════════════════════════════════ */
+
+.rule-h {
+  height: 1px;
+  background: var(--rule);
 }
 
-.animate-fade-in-up {
-  animation: fadeInUp 0.6s ease-out;
+.rule-v {
+  width: 1px;
+  background: var(--rule);
 }
+
+/* ═══════════════════════════════════════════
+   COMPONENTS
+   ═══════════════════════════════════════════ */
+
+/* --- Navigation --- */
+.nav-link {
+  font-family: 'Yanone Kaffeesatz', sans-serif;
+  font-size: 1.35rem;
+  font-weight: 500;
+  color: var(--text-dim);
+  padding: 0.2rem 1rem;
+  transition: all 0.2s;
+  display: inline-block;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  border: 1px solid transparent;
+  border-radius: 4px;
+}
+
+.nav-link:hover {
+  color: var(--accent);
+}
+
+.nav-link[data-active="true"] {
+  color: var(--accent);
+  border-color: var(--text);
+}
+
+/* --- Buttons --- */
+.btn-accent {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  font-family: 'Yanone Kaffeesatz', sans-serif;
+  font-size: 1.35rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--bg);
+  background: var(--accent);
+  padding: 0.5rem 2rem;
+  border-radius: 4px;
+  transition: background 0.2s, transform 0.2s;
+}
+
+.btn-accent:hover {
+  background: var(--accent-hover);
+  transform: translateY(-1px);
+}
+
+.btn-outline {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  font-family: 'Yanone Kaffeesatz', sans-serif;
+  font-size: 1.35rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--text);
+  background: transparent;
+  padding: 0.5rem 2rem;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  transition: border-color 0.2s, color 0.2s;
+}
+
+.btn-outline:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+/* --- Theme toggle --- */
+.theme-toggle {
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-dim);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  cursor: pointer;
+  transition: color 0.2s, border-color 0.2s;
+  background: transparent;
+  flex-shrink: 0;
+}
+
+.theme-toggle:hover {
+  color: var(--accent);
+  border-color: var(--accent);
+}
+
+/* ═══════════════════════════════════════════
+   PROSE (Markdown articles)
+   ═══════════════════════════════════════════ */
+
+.prose-physics {
+  font-family: 'Inter', sans-serif;
+  line-height: 1.75;
+  color: var(--text-dim);
+  font-size: 1.1rem;
+}
+
+.prose-physics h1, .prose-physics h2, .prose-physics h3 {
+  font-family: 'Playfair Display', serif;
+  font-weight: 500;
+  color: var(--text);
+  margin-top: 2em;
+  margin-bottom: 0.75em;
+}
+
+.prose-physics h1 { font-size: 2.5rem; border-bottom: 1px solid var(--rule); padding-bottom: 0.5rem; }
+.prose-physics h2 { font-size: 2rem; }
+.prose-physics h3 { font-size: 1.5rem; }
+
+.prose-physics p { margin-bottom: 1.25em; }
+
+.prose-physics a {
+  color: var(--accent);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  transition: color 0.2s;
+}
+.prose-physics a:hover { color: var(--accent-hover); }
+
+.prose-physics strong { color: var(--text); font-weight: 600; }
+
+.prose-physics code {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.9em;
+  color: var(--accent2);
+  background: var(--bg-surface);
+  padding: 0.2em 0.4em;
+  border-radius: 4px;
+}
+
+.prose-physics pre {
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
+  padding: 1.5rem;
+  overflow-x: auto;
+  border-radius: 8px;
+}
+
+.prose-physics pre code {
+  background: none;
+  color: var(--text-dim);
+  padding: 0;
+}
+
+.prose-physics blockquote {
+  border-left: 3px solid var(--accent);
+  padding: 0.5rem 1.5rem;
+  background: var(--bg-surface);
+  color: var(--text);
+  border-radius: 0 8px 8px 0;
+  font-style: italic;
+}
+
+.prose-physics ul, .prose-physics ol { color: var(--text-dim); padding-left: 1.5rem; }
+.prose-physics li { margin-bottom: 0.5rem; }
+.prose-physics li::marker { color: var(--accent); }
+
+.prose-physics img {
+  border: 1px solid var(--border);
+  border-radius: 4px;
+}
+
+.prose-physics hr { border: 0; border-top: 1px solid var(--rule); margin: 3rem 0; }
+
+.prose-physics table { border-collapse: collapse; width: 100%; }
+.prose-physics th {
+  color: var(--text);
+  border-bottom: 2px solid var(--border);
+  text-align: left;
+  padding: 0.75rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+.prose-physics td {
+  border-bottom: 1px solid var(--rule);
+  padding: 0.75rem;
+}
+
+.prose-physics .katex { color: var(--text); font-family: 'JetBrains Mono', monospace !important; }
+.prose-physics .katex-display { overflow-x: auto; overflow-y: hidden; padding: 1rem 0; }
+
+/* ═══════════════════════════════════════════
+   LIGHT MODE overrides for tailwind utilities
+   used in admin/pdf-viewer (legacy compat)
+   ═══════════════════════════════════════════ */
+.dark .text-gray-300 { color: #d4cfc4 !important; }
+.dark .text-gray-400 { color: #a3a3a3 !important; }
+.dark .text-gray-500 { color: #737373 !important; }
+.dark .text-white { color: #faf8f3 !important; }
+.dark .bg-prussian\/20 { background: var(--bg-surface) !important; }
+.dark .bg-prussian\/40 { background: var(--bg-surface) !important; }
+.dark .border-prussian { border-color: var(--border) !important; }
+.dark .border-prussian\/50 { border-color: var(--border-light) !important; }
+.dark .border-prussian\/30 { border-color: var(--border) !important; }
+.dark .bg-black\/90 { background: var(--bg-raised) !important; }
+.dark .text-orange { color: var(--accent) !important; }
+.dark .bg-orange { background: var(--accent) !important; }
+.dark .border-t-orange { border-top-color: var(--accent) !important; }
+
+/* Admin compat — green/yellow status pills */
+.bg-green-500\/10 { background: rgba(34, 139, 34, 0.1) !important; }
+.bg-yellow-500\/10 { background: rgba(200, 150, 0, 0.1) !important; }

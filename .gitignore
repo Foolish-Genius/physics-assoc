@@ -34,3 +34,6 @@ yarn-error.log*
 
 # Next.js
 .next/
+
+# IDE
+.vscode/
