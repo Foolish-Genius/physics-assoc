@@ -19,7 +19,7 @@ export const socialLinks = [
   },
   {
     name: 'YouTube',
-    url: 'https://www.youtube.com/channel/UCh81x2kZQHc64xVwWAmCKWQ',
+    url: 'https://youtube.com/@bitsphysicsassoc?si=-H9iE8cGy-ugRGXs',
     icon: FaYoutube,
   },
 ];

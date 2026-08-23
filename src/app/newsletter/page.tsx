@@ -4,6 +4,10 @@ import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { supabase } from '@/lib/supabase';
 import { Newsletter } from '@/lib/types';
+import { Document, Page } from 'react-pdf';
+import 'react-pdf/dist/Page/AnnotationLayer.css';
+import 'react-pdf/dist/Page/TextLayer.css';
+import '@/lib/pdfjsSetup';
 
 export default function NewsletterPage() {
   const [newsletters, setNewsletters] = useState<Newsletter[]>([]);
@@ -50,22 +54,31 @@ export default function NewsletterPage() {
           ) : newsletters.length > 0 ? (
             <div className="grid sm:grid-cols-2 gap-10">
               {newsletters.map((newsletter, i) => (
-                <div key={newsletter.id} className="p-8 border bg-bg-surface hover:border-accent transition-all duration-300 flex flex-col" style={{ borderColor: 'var(--border)' }}>
-                  <div className="flex justify-between items-start mb-6">
-                    <span className="text-xl font-yanone uppercase tracking-[0.1em] text-accent">{newsletter.issue || `Issue #${newsletters.length - i}`}</span>
-                    <span className="text-lg text-text-muted font-yanone uppercase tracking-[0.1em]">
-                      {new Date(newsletter.created_at).toLocaleDateString('en-US', { month: 'short', year: 'numeric' })}
-                    </span>
-                  </div>
-                  <Link href={`/newsletter/${newsletter.slug}`}>
-                    <h3 className="text-4xl text-text mb-4 hover:text-accent transition-colors font-display leading-tight">
-                      {newsletter.title}
-                    </h3>
+                <div key={newsletter.id} className="border bg-bg-surface hover:border-accent transition-all duration-300 flex flex-col overflow-hidden group" style={{ borderColor: 'var(--border)' }}>
+                  <Link href={`/newsletter/${newsletter.slug}`} className="block h-48 md:h-64 overflow-hidden relative bg-[var(--bg)] border-b" style={{ borderColor: 'var(--border)' }}>
+                    <div className="absolute top-0 left-0 w-full flex justify-center pointer-events-none transform transition-transform duration-700 group-hover:-translate-y-4">
+                      <Document file={newsletter.file_url} loading={<div className="h-48 flex items-center justify-center text-text-muted text-xs uppercase tracking-widest">Loading Cover...</div>}>
+                         <Page pageNumber={1} width={600} renderTextLayer={false} renderAnnotationLayer={false} className="shadow-2xl" />
+                      </Document>
+                    </div>
                   </Link>
-                  <p className="text-[0.95rem] text-text-dim mb-10 line-clamp-2 leading-relaxed">{newsletter.description}</p>
-                  <div className="flex items-center justify-between mt-auto border-t pt-6" style={{ borderColor: 'var(--border)' }}>
-                    <Link href={`/newsletter/${newsletter.slug}`} className="text-xl font-yanone uppercase tracking-[0.1em] text-text hover:text-accent transition-colors">Read Now →</Link>
-                    <a href={newsletter.file_url} download className="text-lg font-yanone tracking-[0.1em] text-text-muted hover:text-accent transition-colors uppercase">PDF ({formatBytes(newsletter.file_size_bytes)})</a>
+                  <div className="p-8 flex flex-col flex-1">
+                    <div className="flex justify-between items-start mb-6">
+                      <span className="text-xl font-yanone uppercase tracking-[0.1em] text-accent">{newsletter.issue || `Issue #${newsletters.length - i}`}</span>
+                      <span className="text-lg text-text-muted font-yanone uppercase tracking-[0.1em]">
+                        {new Date(newsletter.created_at).toLocaleDateString('en-US', { month: 'short', year: 'numeric' })}
+                      </span>
+                    </div>
+                    <Link href={`/newsletter/${newsletter.slug}`}>
+                      <h3 className="text-4xl text-text mb-4 hover:text-accent transition-colors font-display leading-tight">
+                        {newsletter.title}
+                      </h3>
+                    </Link>
+                    <p className="text-[0.95rem] text-text-dim mb-10 line-clamp-2 leading-relaxed">{newsletter.description}</p>
+                    <div className="flex items-center justify-between mt-auto border-t pt-6" style={{ borderColor: 'var(--border)' }}>
+                      <Link href={`/newsletter/${newsletter.slug}`} className="text-xl font-yanone uppercase tracking-[0.1em] text-text hover:text-accent transition-colors">Read Now →</Link>
+                      <a href={newsletter.file_url} download className="text-lg font-yanone tracking-[0.1em] text-text-muted hover:text-accent transition-colors uppercase">PDF ({formatBytes(newsletter.file_size_bytes)})</a>
+                    </div>
                   </div>
                 </div>
               ))}

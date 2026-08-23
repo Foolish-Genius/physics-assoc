@@ -36,19 +36,22 @@ export default function Header() {
     >
       <nav className="max-w-[1400px] mx-auto px-5 md:px-8">
         <div className="flex items-center justify-between h-24">
-          
+
           {/* Left: Logo */}
-          <Link href="/" className="flex items-baseline gap-2 group w-1/4">
-            <span
-              className="text-3xl md:text-5xl tracking-wide transition-colors group-hover:text-accent font-yanone"
-            >
-              Physics
-            </span>
-            <span
-              className="text-[0.65rem] md:text-xs font-sans uppercase tracking-[0.2em] text-text-muted font-semibold"
-            >
-              Assoc.
-            </span>
+          <Link href="/" className="flex items-center gap-3 group w-1/4">
+            <img src="https://res.cloudinary.com/daelpfpju/image/upload/v1787506045/physics-assoc_logo_lrnotx.jpg" alt="Club Logo" className="w-10 h-10 object-contain rounded-full" />
+            <div className="flex items-baseline gap-2">
+              <span
+                className="text-3xl md:text-5xl tracking-wide transition-colors group-hover:text-accent font-yanone"
+              >
+                Physics
+              </span>
+              <span
+                className="text-[0.65rem] md:text-xs font-sans uppercase tracking-[0.2em] text-text-muted font-semibold"
+              >
+                Assoc.
+              </span>
+            </div>
           </Link>
 
           {/* Center: Desktop nav */}

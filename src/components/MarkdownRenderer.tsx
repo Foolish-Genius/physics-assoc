@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { useMemo } from 'react';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import remarkMath from 'remark-math';
@@ -29,33 +29,39 @@ const katexOptions = {
   },
 };
 
+function preprocessLatex(content: string) {
+  let processed = content;
+  if (processed.includes('\\begin{document}')) {
+    const bodyMatch = processed.match(/\\begin\{document\}([\s\S]*?)\\end\{document\}/);
+    if (bodyMatch) processed = bodyMatch[1];
+    
+    processed = processed.replace(/\\section\*?\{([^}]+)\}/g, '## $1');
+    processed = processed.replace(/\\subsection\*?\{([^}]+)\}/g, '### $1');
+    processed = processed.replace(/\\textbf\{([^}]+)\}/g, '**$1**');
+    processed = processed.replace(/\\textit\{([^}]+)\}/g, '*$1*');
+    processed = processed.replace(/\\title\{([^}]+)\}/g, '# $1\n');
+    processed = processed.replace(/\\author\{[^}]*\}/g, '');
+    processed = processed.replace(/\\date\{[^}]*\}/g, '');
+    processed = processed.replace(/\\maketitle/g, '');
+    
+    processed = processed.replace(/\\\[/g, '$$$$');
+    processed = processed.replace(/\\\]/g, '$$$$');
+    processed = processed.replace(/\\\(/g, '$');
+    processed = processed.replace(/\\\)/g, '$');
+  }
+  return processed;
+}
+
 export default function MarkdownRenderer({ content }: MarkdownRendererProps) {
+  const processedContent = useMemo(() => preprocessLatex(content), [content]);
+
   return (
-    <div className="prose prose-invert prose-lg max-w-none
-      prose-headings:font-bold prose-headings:text-white prose-headings:font-poppins
-      prose-h1:text-4xl prose-h1:mb-6 prose-h1:mt-8
-      prose-h2:text-3xl prose-h2:mb-4 prose-h2:mt-8 prose-h2:border-b prose-h2:border-prussian prose-h2:pb-2
-      prose-h3:text-2xl prose-h3:mb-3 prose-h3:mt-6
-      prose-p:text-gray-300 prose-p:leading-relaxed prose-p:mb-4
-      prose-a:text-orange prose-a:no-underline hover:prose-a:text-orange/80 hover:prose-a:underline
-      prose-strong:text-white
-      prose-em:text-gray-200
-      prose-code:text-orange prose-code:bg-prussian/50 prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded prose-code:text-sm prose-code:font-mono
-      prose-pre:bg-prussian/40 prose-pre:border prose-pre:border-prussian prose-pre:rounded-xl prose-pre:backdrop-blur-sm
-      prose-blockquote:border-l-orange prose-blockquote:bg-prussian/20 prose-blockquote:rounded-r-lg prose-blockquote:py-1 prose-blockquote:italic
-      prose-ul:text-gray-300 prose-ol:text-gray-300
-      prose-li:marker:text-orange
-      prose-img:rounded-xl prose-img:border prose-img:border-prussian/50
-      prose-hr:border-prussian
-      prose-table:border-prussian prose-th:text-orange prose-th:border-prussian prose-td:border-prussian
-      [&_.katex]:text-gray-100
-      [&_.katex-display]:overflow-x-auto [&_.katex-display]:overflow-y-hidden [&_.katex-display]:py-2
-    ">
+    <div className="prose-physics max-w-none">
       <ReactMarkdown
         remarkPlugins={[remarkGfm, remarkMath]}
         rehypePlugins={[[rehypeKatex, katexOptions]]}
       >
-        {content}
+        {processedContent}
       </ReactMarkdown>
     </div>
   );
