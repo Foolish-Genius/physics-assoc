@@ -4,10 +4,12 @@ import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { supabase } from '@/lib/supabase';
 import { Newsletter } from '@/lib/types';
-import { Document, Page } from 'react-pdf';
-import 'react-pdf/dist/Page/AnnotationLayer.css';
-import 'react-pdf/dist/Page/TextLayer.css';
-import '@/lib/pdfjsSetup';
+import dynamic from 'next/dynamic';
+
+const PdfThumbnail = dynamic(() => import('@/components/PdfThumbnail'), { 
+  ssr: false,
+  loading: () => <div className="h-48 flex items-center justify-center text-text-muted text-xs uppercase tracking-widest">Loading Cover...</div>
+});
 
 export default function NewsletterPage() {
   const [newsletters, setNewsletters] = useState<Newsletter[]>([]);
@@ -57,9 +59,7 @@ export default function NewsletterPage() {
                 <div key={newsletter.id} className="border bg-bg-surface hover:border-accent transition-all duration-300 flex flex-col overflow-hidden group" style={{ borderColor: 'var(--border)' }}>
                   <Link href={`/newsletter/${newsletter.slug}`} className="block h-48 md:h-64 overflow-hidden relative bg-[var(--bg)] border-b" style={{ borderColor: 'var(--border)' }}>
                     <div className="absolute top-0 left-0 w-full flex justify-center pointer-events-none transform transition-transform duration-700 group-hover:-translate-y-4">
-                      <Document file={newsletter.file_url} loading={<div className="h-48 flex items-center justify-center text-text-muted text-xs uppercase tracking-widest">Loading Cover...</div>}>
-                         <Page pageNumber={1} width={600} renderTextLayer={false} renderAnnotationLayer={false} className="shadow-2xl" />
-                      </Document>
+                      <PdfThumbnail url={newsletter.file_url} />
                     </div>
                   </Link>
                   <div className="p-8 flex flex-col flex-1">
