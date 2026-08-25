@@ -1,12 +1,19 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useRouter, useParams } from 'next/navigation';
 import Link from 'next/link';
 import { supabase } from '@/lib/supabase';
 import { Article } from '@/lib/types';
 import MarkdownRenderer from '@/components/MarkdownRenderer';
-import { looksLikeLatexDocument, convertLatexToMarkdown } from '@/lib/latexToMarkdown';
+import {
+  looksLikeLatexDocument,
+  convertLatexToMarkdown,
+  countImagePlaceholders,
+  IMAGE_PLACEHOLDER,
+} from '@/lib/latexToMarkdown';
+import { uploadArticleImage, imageFilesFrom } from '@/lib/uploadImage';
+import ImageUploader from '@/components/ImageUploader';
 import toast from 'react-hot-toast';
 
 export default function EditArticlePage() {
@@ -33,13 +40,61 @@ export default function EditArticlePage() {
     checkAuth();
   }, []);
 
+  const contentRef = useRef<HTMLTextAreaElement>(null);
+
+  // An uploaded image fills the next figure placeholder a LaTeX paste left
+  // behind, so converting a .tex and then uploading its figures in order just
+  // works. Once none are left, the image lands at the cursor instead.
+  function insertImageMarkdown(url: string) {
+    setContent((current) => {
+      if (current.includes(IMAGE_PLACEHOLDER)) {
+        return current.replace(IMAGE_PLACEHOLDER, () => url);
+      }
+      const at = contentRef.current?.selectionStart ?? current.length;
+      return current.slice(0, at) + `\n\n![](${url})\n\n` + current.slice(at);
+    });
+  }
+
+  async function uploadImages(files: File[]) {
+    for (const file of files) {
+      try {
+        insertImageMarkdown(await uploadArticleImage(file));
+        toast.success(`Uploaded ${file.name}`);
+      } catch (err: any) {
+        toast.error(err?.message ?? 'Upload failed');
+      }
+    }
+  }
+
   function handleContentPaste(e: React.ClipboardEvent<HTMLTextAreaElement>) {
+    // A screenshot on the clipboard goes straight to storage — no repo commit,
+    // no manual URL.
+    const images = imageFilesFrom(e.clipboardData.items);
+    if (images.length) {
+      e.preventDefault();
+      void uploadImages(images);
+      return;
+    }
+
     const pasted = e.clipboardData.getData('text');
     if (looksLikeLatexDocument(pasted)) {
       e.preventDefault();
-      setContent(convertLatexToMarkdown(pasted));
-      toast.success('Detected LaTeX — converted to Markdown automatically');
+      const converted = convertLatexToMarkdown(pasted);
+      setContent(converted);
+      const missing = countImagePlaceholders(converted);
+      toast.success(
+        missing
+          ? `Converted LaTeX — ${missing} figure${missing > 1 ? 's' : ''} still need an image, upload them in order`
+          : 'Detected LaTeX — converted to Markdown automatically'
+      );
     }
+  }
+
+  function handleContentDrop(e: React.DragEvent<HTMLTextAreaElement>) {
+    const images = imageFilesFrom(e.dataTransfer.files);
+    if (!images.length) return;
+    e.preventDefault();
+    void uploadImages(images);
   }
 
   async function checkAuth() {
@@ -233,15 +288,19 @@ export default function EditArticlePage() {
                 {/* Cover Image URL */}
                 <div>
                   <label htmlFor="cover" className="block text-sm font-medium text-gray-400 mb-2">
-                    Cover Image URL
+                    Cover Image
                   </label>
+                  <div className="flex flex-col sm:flex-row gap-3">
                   <input
                     id="cover"
                     type="url"
                     value={coverImage}
                     onChange={(e) => setCoverImage(e.target.value)}
                     className="w-full px-4 py-3 bg-black/50 border border-prussian rounded-lg text-white placeholder-gray-600 focus:outline-none focus:border-orange/50 transition-colors"
+                    placeholder="Upload a file, or paste an image URL"
                   />
+                  <ImageUploader onUploaded={setCoverImage} label="Upload cover" className="shrink-0" />
+                  </div>
                 </div>
 
                 {/* Excerpt */}
@@ -263,11 +322,20 @@ export default function EditArticlePage() {
                   <label htmlFor="content" className="block text-sm font-medium text-gray-400 mb-2">
                     Content * <span className="text-gray-600">(Markdown + LaTeX supported: $inline$ or $$block$$ — or paste a full .tex article and it auto-converts)</span>
                   </label>
+                  <div className="flex flex-wrap items-center gap-3 mb-2">
+                    <ImageUploader onUploaded={insertImageMarkdown} label="Insert image" multiple />
+                    <span className="text-xs text-gray-600">
+                      Images upload to storage — you can also paste or drop them straight into the box.
+                    </span>
+                  </div>
                   <textarea
                     id="content"
+                    ref={contentRef}
                     value={content}
                     onChange={(e) => setContent(e.target.value)}
                     onPaste={handleContentPaste}
+                    onDrop={handleContentDrop}
+                    onDragOver={(e) => e.preventDefault()}
                     required
                     rows={20}
                     className="w-full px-4 py-3 bg-black/50 border border-prussian rounded-lg text-white placeholder-gray-600 focus:outline-none focus:border-orange/50 transition-colors font-mono text-sm resize-y"
