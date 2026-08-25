@@ -1,9 +1,28 @@
+'use client';
+
+import { useEffect, useState } from 'react';
 import { ArticleCard } from '@/components';
-import { featuredArticles } from '@/constants';
+import { supabase } from '@/lib/supabase';
+import { Article } from '@/lib/types';
 import Image from 'next/image';
 import Link from 'next/link';
 
 export default function Home() {
+  const [featuredArticles, setFeaturedArticles] = useState<Article[]>([]);
+
+  useEffect(() => {
+    async function fetchFeaturedArticles() {
+      const { data, error } = await supabase
+        .from('articles')
+        .select('*')
+        .eq('published', true)
+        .order('created_at', { ascending: false })
+        .limit(3);
+      if (!error && data) setFeaturedArticles(data as Article[]);
+    }
+    fetchFeaturedArticles();
+  }, []);
+
   return (
     <>
       {/* ── Hero / About ── */}
@@ -120,7 +139,14 @@ export default function Home() {
 
           <div className="grid md:grid-cols-3 gap-10">
             {featuredArticles.map((article) => (
-              <ArticleCard key={article.id} {...article} />
+              <ArticleCard
+                key={article.id}
+                title={article.title}
+                description={article.excerpt}
+                author={article.author}
+                image={article.cover_image}
+                slug={article.slug}
+              />
             ))}
           </div>
         </div>

@@ -22,6 +22,7 @@ export default function ArticlePage() {
     const { data, error } = await supabase.from('articles').select('*').eq('slug', slug).eq('published', true).single();
     if (error || !data) { setNotFound(true); setLoading(false); return; }
     setArticle(data as Article);
+    setNotFound(false);
     setLoading(false);
   }
 
@@ -47,7 +48,7 @@ export default function ArticlePage() {
       {article.cover_image && (
         <div className="max-w-[1200px] mx-auto px-5 md:px-8 mb-20 relative z-10">
           <div className="relative aspect-[21/9] overflow-hidden border" style={{ borderColor: 'var(--border)' }}>
-            <Image src={article.cover_image} alt={article.title} fill className="object-cover" priority />
+            <Image src={article.cover_image} alt={article.title} fill unoptimized priority className="object-cover" />
           </div>
         </div>
       )}

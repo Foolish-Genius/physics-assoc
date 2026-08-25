@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { supabase } from '@/lib/supabase';
 import MarkdownRenderer from '@/components/MarkdownRenderer';
+import { looksLikeLatexDocument, convertLatexToMarkdown } from '@/lib/latexToMarkdown';
 import toast from 'react-hot-toast';
 
 export default function ArticleEditorPage() {
@@ -15,7 +16,6 @@ export default function ArticleEditorPage() {
 
   const [title, setTitle] = useState('');
   const [slug, setSlug] = useState('');
-  const [slugManuallyEdited, setSlugManuallyEdited] = useState(false);
   const [excerpt, setExcerpt] = useState('');
   const [content, setContent] = useState('');
   const [coverImage, setCoverImage] = useState('');
@@ -27,19 +27,27 @@ export default function ArticleEditorPage() {
     checkAuth();
   }, []);
 
-  // Auto-generate slug from title
+  // Slug is always derived from the title — never hand-typed. A malformed,
+  // hand-edited slug (spaces, slashes) has broken article routing before.
   useEffect(() => {
-    if (!slugManuallyEdited) {
-      setSlug(
-        title
-          .toLowerCase()
-          .replace(/[^a-z0-9\s-]/g, '')
-          .replace(/\s+/g, '-')
-          .replace(/-+/g, '-')
-          .trim()
-      );
+    setSlug(
+      title
+        .toLowerCase()
+        .replace(/[^a-z0-9\s-]/g, '')
+        .replace(/\s+/g, '-')
+        .replace(/-+/g, '-')
+        .trim()
+    );
+  }, [title]);
+
+  function handleContentPaste(e: React.ClipboardEvent<HTMLTextAreaElement>) {
+    const pasted = e.clipboardData.getData('text');
+    if (looksLikeLatexDocument(pasted)) {
+      e.preventDefault();
+      setContent(convertLatexToMarkdown(pasted));
+      toast.success('Detected LaTeX — converted to Markdown automatically');
     }
-  }, [title, slugManuallyEdited]);
+  }
 
   async function checkAuth() {
     const { data: { session } } = await supabase.auth.getSession();
@@ -160,7 +168,7 @@ export default function ArticleEditorPage() {
                 {/* Slug */}
                 <div>
                   <label htmlFor="slug" className="block text-sm font-medium text-gray-400 mb-2">
-                    Slug * <span className="text-gray-600">(URL-friendly identifier)</span>
+                    Slug <span className="text-gray-600">(auto-generated from title, not editable)</span>
                   </label>
                   <div className="flex items-center gap-2">
                     <span className="text-gray-600 text-sm">/blog/</span>
@@ -168,12 +176,9 @@ export default function ArticleEditorPage() {
                       id="slug"
                       type="text"
                       value={slug}
-                      onChange={(e) => {
-                        setSlug(e.target.value);
-                        setSlugManuallyEdited(true);
-                      }}
+                      readOnly
                       required
-                      className="flex-1 px-4 py-3 bg-black/50 border border-prussian rounded-lg text-white placeholder-gray-600 focus:outline-none focus:border-orange/50 transition-colors font-mono text-sm"
+                      className="flex-1 px-4 py-3 bg-black/30 border border-prussian rounded-lg text-gray-400 cursor-not-allowed font-mono text-sm"
                       placeholder="your-article-slug"
                     />
                   </div>
@@ -244,16 +249,17 @@ export default function ArticleEditorPage() {
                 {/* Content */}
                 <div>
                   <label htmlFor="content" className="block text-sm font-medium text-gray-400 mb-2">
-                    Content * <span className="text-gray-600">(Markdown + LaTeX supported: $inline$ or $$block$$)</span>
+                    Content * <span className="text-gray-600">(Markdown + LaTeX supported: $inline$ or $$block$$ — or paste a full .tex article and it auto-converts)</span>
                   </label>
                   <textarea
                     id="content"
                     value={content}
                     onChange={(e) => setContent(e.target.value)}
+                    onPaste={handleContentPaste}
                     required
                     rows={20}
                     className="w-full px-4 py-3 bg-black/50 border border-prussian rounded-lg text-white placeholder-gray-600 focus:outline-none focus:border-orange/50 transition-colors font-mono text-sm resize-y"
-                    placeholder="Write your article in markdown..."
+                    placeholder="Write your article in markdown, or paste a full .tex article..."
                   />
                 </div>
               </div>
