@@ -6,6 +6,7 @@ import remarkGfm from 'remark-gfm';
 import remarkMath from 'remark-math';
 import rehypeKatex from 'rehype-katex';
 import 'katex/dist/katex.min.css';
+import { looksLikeLatexDocument, convertLatexToMarkdown } from '@/lib/latexToMarkdown';
 
 interface MarkdownRendererProps {
   content: string;
@@ -26,30 +27,22 @@ const katexOptions = {
     '\\bra': '\\left\\langle#1\\right|',
     '\\braket': '\\left\\langle#1\\middle|#2\\right\\rangle',
     '\\expval': '\\left\\langle#1\\right\\rangle',
+    // Pauli/identity shorthand. Articles that define their own \newcommand
+    // versions have them expanded at conversion time; these cover the ones
+    // already published before that conversion existed.
+    '\\I': '\\mathbb{1}',
+    '\\sx': '\\sigma_x',
+    '\\sy': '\\sigma_y',
+    '\\sz': '\\sigma_z',
+    '\\Kop': 'K_{\\alpha}',
   },
 };
 
+// Articles saved before the editor converted on paste still hold raw LaTeX, so
+// render-time conversion runs through exactly the same converter the editor
+// uses rather than a second, weaker copy of the rules.
 function preprocessLatex(content: string) {
-  let processed = content;
-  if (processed.includes('\\begin{document}')) {
-    const bodyMatch = processed.match(/\\begin\{document\}([\s\S]*?)\\end\{document\}/);
-    if (bodyMatch) processed = bodyMatch[1];
-    
-    processed = processed.replace(/\\section\*?\{([^}]+)\}/g, '## $1');
-    processed = processed.replace(/\\subsection\*?\{([^}]+)\}/g, '### $1');
-    processed = processed.replace(/\\textbf\{([^}]+)\}/g, '**$1**');
-    processed = processed.replace(/\\textit\{([^}]+)\}/g, '*$1*');
-    processed = processed.replace(/\\title\{([^}]+)\}/g, '# $1\n');
-    processed = processed.replace(/\\author\{[^}]*\}/g, '');
-    processed = processed.replace(/\\date\{[^}]*\}/g, '');
-    processed = processed.replace(/\\maketitle/g, '');
-    
-    processed = processed.replace(/\\\[/g, '$$$$');
-    processed = processed.replace(/\\\]/g, '$$$$');
-    processed = processed.replace(/\\\(/g, '$');
-    processed = processed.replace(/\\\)/g, '$');
-  }
-  return processed;
+  return looksLikeLatexDocument(content) ? convertLatexToMarkdown(content) : content;
 }
 
 export default function MarkdownRenderer({ content }: MarkdownRendererProps) {

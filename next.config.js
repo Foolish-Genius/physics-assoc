@@ -9,6 +9,11 @@ const nextConfig = {
         hostname: 'raw.githubusercontent.com',
       },
       {
+        // Article and cover images uploaded from the admin editor.
+        protocol: 'https',
+        hostname: '**.supabase.co',
+      },
+      {
         protocol: 'https',
         hostname: 'media.istockphoto.com',
       },
