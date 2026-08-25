@@ -16,7 +16,7 @@ export default function BlogCard({ article }: BlogCardProps) {
     <article className="group p-8 border bg-bg-surface transition-all duration-300 hover:border-accent flex flex-col md:flex-row gap-8" style={{ borderColor: 'var(--border)' }}>
       {article.cover_image && (
         <Link href={`/blog/${article.slug}`} className="flex-shrink-0 relative overflow-hidden w-full md:w-64 h-48 md:h-auto">
-          <Image src={article.cover_image} alt={article.title} fill className="object-cover transition-transform duration-500 group-hover:scale-105" />
+          <Image src={article.cover_image} alt={article.title} fill unoptimized className="object-cover transition-transform duration-500 group-hover:scale-105" />
         </Link>
       )}
       <div className="flex-1 flex flex-col justify-center">

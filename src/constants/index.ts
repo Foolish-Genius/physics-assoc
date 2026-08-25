@@ -32,39 +32,6 @@ export const navigationLinks = [
   { label: 'Short Posts', href: 'https://www.instagram.com/bits_phyassoc/' },
 ];
 
-export const featuredArticles = [
-  {
-    id: 1,
-    title: 'Errors and Error Correction in the Quantum World',
-    description:
-      'Quantum Computers offer a robust model of computing but are hard to build. Read on to learn about some sources of quantum errors and ways to overcome them.',
-    author: 'Uday Singla',
-    image:
-      'https://raw.githubusercontent.com/bitsphyassoc/blog/master/images/blog/4-error/title.jpeg',
-    url: 'https://bitsphyassoc.github.io/blog/quantum%20computation/errors/bloch%20sphere/2021/09/04/quantum-error.html',
-  },
-  {
-    id: 2,
-    title: 'Hyperspace',
-    description:
-      'In search of a Grand Unified Theory for physics, we need to search deeper, in new dimensions.',
-    author: 'Aryan Singh',
-    image:
-      'https://media.istockphoto.com/photos/abstract-blue-flight-in-space-hyper-jump-3d-rendering-picture-id1288036111?k=20&m=1288036111&s=612x612&w=0&h=Nmjm1IeQQb2oAQhnfvlhbTelZar5s1x7dTpD-1M4rik=',
-    url: 'https://bitsphyassoc.github.io/blog/alternate%20dimensions/speed%20of%20light/einstein%E2%80%99s%20field%20equations/2022/02/02/Hyperspace.html',
-  },
-  {
-    id: 3,
-    title: 'A primer to the Standard Model',
-    description:
-      'Let me introduce you to one of the most successful models in particle physics - The Standard Model',
-    author: 'Abhinav Choudhary',
-    image:
-      'https://physicsworld.com/wp-content/uploads/2020/04/Martina-Hestericova-3-April-Quantum-computing-for-high-energy-physics_authorized.jpg',
-    url: 'https://bitsphyassoc.github.io/blog/particle%20physics/standard%20model/elementary%20particles/universe/2021/08/16/standard-model.html',
-  },
-];
-
 export const quotes = [
   {
     text: 'God does not play dice',

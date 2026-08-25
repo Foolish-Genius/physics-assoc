@@ -16,6 +16,10 @@ const nextConfig = {
         protocol: 'https',
         hostname: 'physicsworld.com',
       },
+      {
+        protocol: 'https',
+        hostname: 'www.worldatlas.com',
+      },
     ],
   },
 };
