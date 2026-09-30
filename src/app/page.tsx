@@ -1,7 +1,8 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { ArticleCard } from '@/components';
+import { ArticleCard, XkcdStrip } from '@/components';
+import { XKCD_COMICS } from '@/constants/xkcd';
 import { supabase } from '@/lib/supabase';
 import { Article } from '@/lib/types';
 import Image from 'next/image';
@@ -110,6 +111,13 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      {/* ── Blended XKCD Comic ── */}
+      <XkcdStrip
+        comic={XKCD_COMICS.purity}
+        maxWidth="max-w-2xl"
+        className="py-12"
+      />
 
       {/* ── Featured Articles ── */}
       <section 

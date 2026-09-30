@@ -5,6 +5,8 @@ import Link from 'next/link';
 import { supabase } from '@/lib/supabase';
 import { Newsletter } from '@/lib/types';
 import dynamic from 'next/dynamic';
+import XkcdStrip from '@/components/XkcdStrip';
+import { XKCD_COMICS } from '@/constants/xkcd';
 
 const PdfThumbnail = dynamic(() => import('@/components/PdfThumbnail'), { 
   ssr: false,
@@ -37,13 +39,18 @@ export default function NewsletterPage() {
       <section className="pt-16 pb-24 border-b" style={{ borderColor: 'var(--border)' }}>
         <div className="max-w-[1400px] mx-auto px-5 md:px-8">
           <div className="mb-6"><span className="text-xl uppercase tracking-[0.2em] font-yanone text-accent">Archive</span></div>
-          <div className="max-w-4xl">
-            <h1 className="text-[4rem] md:text-[6.5rem] text-text leading-[1.05] tracking-tight font-display">
-              The <span className="font-lobster text-accent lowercase text-[5rem] md:text-[8rem] inline-block transform -rotate-2">Newsletter</span>
-            </h1>
-            <p className="text-lg md:text-xl text-text-dim leading-relaxed mt-8 max-w-2xl">
-              Read our beautifully crafted physics newsletters. Download the PDFs or read them directly in your browser.
-            </p>
+          <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-8">
+            <div className="max-w-3xl">
+              <h1 className="text-[4rem] md:text-[6.5rem] text-text leading-[1.05] tracking-tight font-display">
+                The <span className="font-lobster text-accent lowercase text-[5rem] md:text-[8rem] inline-block transform -rotate-2">Newsletter</span>
+              </h1>
+              <p className="text-lg md:text-xl text-text-dim leading-relaxed mt-8 max-w-2xl">
+                Read our beautifully crafted physics newsletters. Download the PDFs or read them directly in your browser.
+              </p>
+            </div>
+            <div className="lg:max-w-md w-full shrink-0">
+              <XkcdStrip comic={XKCD_COMICS.teachingPhysics} maxWidth="max-w-md" className="!py-0 !px-0" />
+            </div>
           </div>
         </div>
       </section>
