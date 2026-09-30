@@ -5,6 +5,8 @@ import { supabase } from '@/lib/supabase';
 import { Article } from '@/lib/types';
 import BlogCard from '@/components/BlogCard';
 import BlogHero from '@/components/BlogHero';
+import XkcdStrip from '@/components/XkcdStrip';
+import { XKCD_COMICS } from '@/constants/xkcd';
 
 export default function BlogPage() {
   const [articles, setArticles] = useState<Article[]>([]);
@@ -56,6 +58,15 @@ export default function BlogPage() {
               ))}
             </div>
           </div>
+          {/* Blended XKCD Comic */}
+          <div className="mb-14">
+            <XkcdStrip
+              comic={XKCD_COMICS.fundamentalForces}
+              maxWidth="max-w-xl"
+              className="!py-0"
+            />
+          </div>
+
           {loading ? (
             <div className="space-y-6">{[1, 2, 3].map((i) => <div key={i} className="h-48 border bg-bg-surface animate-pulse" style={{ borderColor: 'var(--border)' }} />)}</div>
           ) : filteredArticles.length > 0 ? (

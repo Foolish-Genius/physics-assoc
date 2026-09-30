@@ -26,10 +26,11 @@ export const socialLinks = [
 
 export const navigationLinks = [
   { label: 'Home', href: '/' },
-  { label: 'About Us', href: '/about' },
+  { label: 'Gallery', href: '/gallery' },
   { label: 'Blog', href: '/blog' },
   { label: 'Newsletter', href: '/newsletter' },
   { label: 'Short Posts', href: 'https://www.instagram.com/bits_phyassoc/' },
+  { label: 'About Us', href: '/about' },
 ];
 
 export const quotes = [
