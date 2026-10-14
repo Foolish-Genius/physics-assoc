@@ -58,14 +58,6 @@ export default function BlogPage() {
               ))}
             </div>
           </div>
-          {/* Blended XKCD Comic */}
-          <div className="mb-14">
-            <XkcdStrip
-              comic={XKCD_COMICS.fundamentalForces}
-              maxWidth="max-w-xl"
-              className="!py-0"
-            />
-          </div>
 
           {loading ? (
             <div className="space-y-6">{[1, 2, 3].map((i) => <div key={i} className="h-48 border bg-bg-surface animate-pulse" style={{ borderColor: 'var(--border)' }} />)}</div>
