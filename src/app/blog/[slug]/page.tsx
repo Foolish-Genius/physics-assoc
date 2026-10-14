@@ -52,7 +52,7 @@ export default function ArticlePage() {
           </div>
         </div>
       )}
-      <div className="max-w-[800px] mx-auto px-5 md:px-8 relative z-10">
+      <div className="max-w-[1200px] mx-auto px-5 md:px-8 relative z-10">
         <div className="p-8 md:p-12 border bg-bg-surface" style={{ borderColor: 'var(--border)' }}>
           <MarkdownRenderer content={article.content} />
         </div>
