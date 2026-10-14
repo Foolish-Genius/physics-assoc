@@ -30,6 +30,3 @@ We welcome contributions! Please feel free to:
 - **Instagram**: [@physicsassociation_bitspilani](https://www.instagram.com/physicsassociation_bitspilani/)
 - **YouTube**: [Physics Association](https://www.youtube.com/@bitsphysicsassoc)
 - **LinkedIn**: [Physics Association BITS Pilani](https://www.linkedin.com/company/physicsassociationbitspilani)
-
-## Developed by
-Physics Association WebDev Team
