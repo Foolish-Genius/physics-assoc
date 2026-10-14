@@ -22,10 +22,12 @@ export default function About() {
   ];
 
   const leadership = [
-    { name: 'Gaurav Naidu', role: 'President', badge: 'Executive', color: 'var(--accent)' },
-    { name: 'Bharat Kumar Saxena', role: 'Secretary', badge: 'Executive', color: 'var(--accent2)' },
-    { name: 'Yammanuru Narasimha Shashank', role: 'Technical Secretary', badge: 'Technical', color: 'var(--accent3)' },
+    { name: 'Gaurav Naidu', role: 'President', badge: 'Commander in Chief', color: 'var(--accent)' },
+    { name: 'Bharat Kumar Saxena', role: 'Secretary', badge: 'General of the Army', color: 'var(--accent2)' },
+    { name: 'Yammanuru Narasimha Shashank', role: 'Technical Secretary', badge: 'General of the Army', color: 'var(--accent3)' },
+    { name: 'Raghav Chawdhry', role: 'APOGEE Coordinator', badge: 'Lieutenant Colonel', color: 'var(--accentx)' },
   ];
+  
 
   const chiefEditors = [
     'Moloy Sikka',
@@ -42,6 +44,7 @@ export default function About() {
     { name: 'Viren Suthar', initials: 'VS', color: 'var(--accent)' },
     { name: 'Harsh Sahu', initials: 'HS', color: 'var(--accent2)' },
     { name: 'Chinmay Senke', initials: 'CS', color: 'var(--accent3)' },
+    // { name: 'Bharat Saxena', initials: 'FG', color: 'var(--accentx)' }
   ];
 
   return (
@@ -60,20 +63,12 @@ export default function About() {
       {/* Our Mission */}
       <section className="py-24 border-t" style={{ background: 'var(--bg-surface)', borderColor: 'var(--border)' }}>
         <div className="max-w-[1400px] mx-auto px-5 md:px-8">
-          <div className="grid md:grid-cols-2 gap-16 items-center">
-            <div className="order-2 md:order-1 relative h-[600px] w-full"><Image src="https://raw.githubusercontent.com/bitsphyassoc/bitsphyassoc.github.io/main/assets/images/feature-image.jpg" alt="Physics Association Team" fill className="object-cover grayscale hover:grayscale-0 transition-all duration-700" /></div>
+          <div className="grid md:grid-cols-1 gap-16 items-center">
+            <div className="order-2 md:order-1 relative h-[400px] w-full"><Image src="/images/asso8.jpg" alt="Physics Association Team" fill className="object-cover grayscale-0 hover:grayscale transition-all duration-700" /></div>
             <div className="order-1 md:order-2 flex flex-col justify-between">
               <div>
                 <div className="flex items-center gap-4 mb-8"><span className="text-2xl font-yanone uppercase tracking-[0.2em] text-accent">Our Mission</span><div className="flex-1 h-px bg-border max-w-xs" /></div>
                 <div className="space-y-6 text-[1.1rem] text-text-dim leading-[1.8]"><p>We are a passionate group of students dedicated to promoting the beautiful language of physics in all of its true glory.</p><p>Based at BITS Pilani, we provide quality content through our blog, engaging social media posts, and interactive events designed to spark curiosity and wonder.</p></div>
-              </div>
-              <div className="mt-8 pt-6 border-t border-[var(--rule)]">
-                <XkcdStrip
-                  comic={XKCD_COMICS.physicists}
-                  maxWidth="max-w-[280px]"
-                  align="left"
-                  className="!py-0"
-                />
               </div>
             </div>
           </div>
@@ -90,10 +85,10 @@ export default function About() {
               </span>
               <div className="w-12 h-px bg-border" />
             </div>
-            <h2 className="text-3xl md:text-5xl font-display font-semibold text-text">
+            {/* <h2 className="text-3xl md:text-5xl font-display font-semibold text-text">
               PoRs
-            </h2>
-            <p className="text-text-dim text-lg mt-3 max-w-2xl leading-relaxed">
+            </h2> */}
+            <p className="text-text-dim text-lg mt-3 leading-relaxed">
               The team leading initiatives, editorial publications, events, and student outreach for the Physics Association.
             </p>
           </div>
@@ -135,7 +130,7 @@ export default function About() {
               <ul className="space-y-3">
                 {chiefEditors.map((name) => (
                   <li key={name} className="flex items-center gap-3 text-text-dim text-lg">
-                    <span className="w-1.5 h-1.5 rounded-full bg-accent" />
+                    <span className="w-1.5 h-1.5 rounded-full bg-accent2" />
                     <span className="text-text font-medium">{name}</span>
                   </li>
                 ))}
@@ -145,7 +140,7 @@ export default function About() {
             {/* Event Leads */}
             <div className="p-8 border bg-bg-surface" style={{ borderColor: 'var(--border)' }}>
               <div className="flex items-center gap-3 mb-6">
-                <span className="text-xs uppercase font-mono tracking-widest px-3 py-1 font-semibold bg-accent2/10 text-accent2">
+                <span className="text-xs uppercase font-mono tracking-widest px-3 py-1 font-semibold bg-accent/10 text-accent">
                   Activities &amp; Talks
                 </span>
               </div>
@@ -162,6 +157,15 @@ export default function About() {
           </div>
         </div>
       </section>
+      
+              {/* <div className="mt-8 pt-6 border-t border-[var(--rule)]">
+                <XkcdStrip
+                  comic={XKCD_COMICS.physicists}
+                  maxWidth="max-w-[280px]"
+                  align="left"
+                  className="!py-0"
+                />
+              </div> */}
 
       {/* Our Values */}
       <section className="py-24 border-t" style={{ background: 'var(--bg-surface)', borderColor: 'var(--border)' }}>
@@ -180,10 +184,10 @@ export default function About() {
         </div>
       </section>
 
-      {/* What We Offer */}
+      {/* What We Do */}
       <section className="py-24 border-t" style={{ background: 'var(--bg-surface)', borderColor: 'var(--border)' }}>
         <div className="max-w-[1400px] mx-auto px-5 md:px-8">
-          <div className="mb-16 flex items-center gap-4"><span className="text-2xl font-yanone uppercase tracking-[0.2em] text-accent">What We Offer</span><div className="w-12 h-px bg-border" /></div>
+          <div className="mb-16 flex items-center gap-4"><span className="text-2xl font-yanone uppercase tracking-[0.2em] text-accent">What We Do</span><div className="w-12 h-px bg-border" /></div>
           <div className="grid md:grid-cols-3 gap-8">
             {offerings.map((item, i) => (
               <div key={i} className="p-8 border flex flex-col bg-bg-surface" style={{ borderColor: 'var(--border)' }}>
