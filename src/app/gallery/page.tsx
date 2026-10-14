@@ -38,11 +38,11 @@ export default function GalleryPage() {
       >
         <div className="max-w-[1400px] mx-auto px-5 md:px-8">
           <GalleryView />
-          <XkcdStrip
+          {/* <XkcdStrip
             comic={XKCD_COMICS.centrifugalForce}
             maxWidth="max-w-[260px]"
             className="pt-12 pb-4"
-          />
+          /> */}
         </div>
       </section>
     </main>
