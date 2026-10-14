@@ -49,7 +49,7 @@ export default function Header() {
               <span
                 className="text-[0.65rem] md:text-xs font-sans uppercase tracking-[0.2em] text-text-muted font-semibold"
               >
-                Assoc.
+                Association
               </span>
             </div>
           </Link>

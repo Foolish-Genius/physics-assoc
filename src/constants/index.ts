@@ -3,24 +3,24 @@ import { FaFacebook, FaLinkedin, FaInstagram, FaYoutube } from 'react-icons/fa';
 
 export const socialLinks = [
   {
-    name: 'Facebook',
-    url: 'https://www.facebook.com/Physics.Association.BITSPilani/',
-    icon: FaFacebook,
+    name: 'YouTube',
+    url: 'https://www.youtube.com/@bitsphysicsassoc',
+    icon: FaYoutube,
   },
+    {
+    name: 'Instagram',
+    url: 'hhttps://www.instagram.com/physicsassociation_bitspilani/',
+    icon: FaInstagram,
+  },
+  // {
+  //   name: 'Facebook',
+  //   url: 'https://www.facebook.com/Physics.Association.BITSPilani/',
+  //   icon: FaFacebook,
+  // },
   {
     name: 'LinkedIn',
     url: 'https://www.linkedin.com/company/physicsassociationbitspilani',
     icon: FaLinkedin,
-  },
-  {
-    name: 'Instagram',
-    url: 'https://www.instagram.com/bits_phyassoc/',
-    icon: FaInstagram,
-  },
-  {
-    name: 'YouTube',
-    url: 'https://youtube.com/@bitsphysicsassoc?si=-H9iE8cGy-ugRGXs',
-    icon: FaYoutube,
   },
 ];
 
@@ -29,7 +29,7 @@ export const navigationLinks = [
   { label: 'Gallery', href: '/gallery' },
   { label: 'Blog', href: '/blog' },
   { label: 'Newsletter', href: '/newsletter' },
-  { label: 'Short Posts', href: 'https://www.instagram.com/bits_phyassoc/' },
+  // { label: 'Short Posts', href: 'https://www.instagram.com/bits_phyassoc/' },
   { label: 'About Us', href: '/about' },
 ];
 
