@@ -3,6 +3,7 @@ import './globals.css';
 import { Toaster } from 'react-hot-toast';
 import { Header, Footer, ThemeProvider } from '@/components';
 import ParticleBackground from '@/components/ParticleBackground';
+import { SpeedInsights } from '@vercel/speed-insights/next';
 
 export const metadata: Metadata = {
   title: 'Physics Association | BITS Pilani',
@@ -26,6 +27,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <main className="relative">{children}</main>
           <Footer />
         </ThemeProvider>
+        <SpeedInsights />
       </body>
     </html>
   );
