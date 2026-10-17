@@ -34,7 +34,7 @@ export default function Header() {
         borderBottom: scrolled ? '1px solid var(--border)' : '1px solid transparent',
       }}
     >
-      <nav className="max-w-[1400px] mx-auto px-5 md:px-8">
+      <nav className="max-w-[1600px] mx-auto px-5 md:px-8">
         <div className="flex items-center justify-between h-24">
 
           {/* Left: Logo */}
