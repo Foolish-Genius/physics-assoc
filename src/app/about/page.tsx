@@ -1,8 +1,21 @@
 import Image from 'next/image';
 import Link from 'next/link';
 
-export const metadata = {
-  title: 'About Us - Physics Association | BITS Pilani',
+import type { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'About Us',
+  description:
+    'Learn about the Physics Association of BITS Pilani — a passionate student community promoting physics through articles, newsletters, seminars, and social media.',
+  openGraph: {
+    title: 'About Us | Physics Association BITS Pilani',
+    description:
+      'Learn about the Physics Association of BITS Pilani — a passionate student community promoting physics through articles, newsletters, seminars, and social media.',
+    url: '/about',
+  },
+  alternates: {
+    canonical: '/about',
+  },
 };
 
 export default function About() {
