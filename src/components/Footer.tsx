@@ -23,7 +23,7 @@ export default function Footer() {
           <div className="md:col-span-3 md:col-start-7">
             <p className="text-2xl uppercase tracking-wider font-yanone text-text mb-4">Navigate</p>
             <ul className="space-y-3">
-              {[{ label: 'Home', href: '/' }, { label: 'About', href: '/about' }, { label: 'Blog', href: '/blog' }, { label: 'Newsletter', href: '/newsletter' }].map((item) => (
+              {[{ label: 'Home', href: '/' }, { label: 'Gallery', href: '/gallery' }, { label: 'Blog', href: '/blog' }, { label: 'Newsletter', href: '/newsletter' }, { label: 'About', href: '/about' }].map((item) => (
                 <li key={item.label}>
                   <Link href={item.href} className="text-text-dim hover:text-accent transition-colors text-sm">{item.label}</Link>
                 </li>
