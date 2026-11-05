@@ -1,5 +1,25 @@
-'use client';
+import type { Metadata } from 'next';
+import BlogContent from './BlogContent';
 
+ fix/blog-404-and-latex-editor
+export const metadata: Metadata = {
+  title: 'Blog',
+  description:
+    'Read in-depth physics articles by the Physics Association of BITS Pilani, covering topics from quantum mechanics and cosmology to particle physics and general relativity.',
+  openGraph: {
+    title: 'Blog | Physics Association BITS Pilani',
+    description:
+      'In-depth physics articles covering quantum mechanics, cosmology, particle physics, and more — written by the Physics Association of BITS Pilani.',
+    url: '/blog',
+  },
+  alternates: {
+    canonical: '/blog',
+  },
+};
+
+export default function BlogPage() {
+  return <BlogContent />;
+=======
 import React, { useState, useEffect } from 'react';
 import { supabase } from '@/lib/supabase';
 import { Article } from '@/lib/types';
@@ -73,4 +93,5 @@ export default function BlogPage() {
       </section>
     </>
   );
+ main
 }

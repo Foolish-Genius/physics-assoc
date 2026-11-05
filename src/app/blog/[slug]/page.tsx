@@ -1,30 +1,83 @@
-'use client';
-
-import React, { useEffect, useState } from 'react';
-import { useParams, useRouter } from 'next/navigation';
-import Image from 'next/image';
+import type { Metadata } from 'next';
 import { supabase } from '@/lib/supabase';
-import { Article } from '@/lib/types';
-import MarkdownRenderer from '@/components/MarkdownRenderer';
+import ArticleContent from './ArticleContent';
+
+const SITE_URL = 'https://phyassoc.is-cool.dev';
+
+export async function generateStaticParams() {
+  return [];
+}
+
+export async function generateMetadata(
+  { params }: { params: { slug: string } }
+): Promise<Metadata> {
+  const { slug } = params;
+
+  if (!supabase) {
+    return { title: 'Article', description: 'Physics article by Physics Association BITS Pilani.' };
+  }
+
+  const { data: article, error } = await supabase
+    .from('articles')
+    .select('title, excerpt, cover_image, author, created_at')
+    .eq('slug', slug)
+    .eq('published', true)
+    .single();
+
+  if (error || !article) {
+    return {
+      title: 'Article Not Found',
+      description: 'This article could not be found.',
+    };
+  }
+
+ fix/blog-404-and-latex-editor
+  const ogImage = article.cover_image ||
+    'https://raw.githubusercontent.com/bitsphyassoc/bitsphyassoc.github.io/main/assets/images/feature-image.jpg';
+
+  const articleJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'Article',
+    headline: article.title,
+    description: article.excerpt,
+    image: ogImage,
+    author: { '@type': 'Person', name: article.author },
+    publisher: {
+      '@type': 'Organization',
+      name: 'Physics Association, BITS Pilani',
+      logo: { '@type': 'ImageObject', url: `${SITE_URL}/favicon.ico` },
+    },
+    datePublished: article.created_at,
+    mainEntityOfPage: { '@type': 'WebPage', '@id': `${SITE_URL}/blog/${slug}` },
+  };
+
+  return {
+    title: article.title,
+    description: article.excerpt,
+    openGraph: {
+      title: article.title,
+      description: article.excerpt,
+      url: `/blog/${slug}`,
+      type: 'article',
+      images: [{ url: ogImage, alt: article.title }],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: article.title,
+      description: article.excerpt,
+      images: [ogImage],
+    },
+    alternates: {
+      canonical: `/blog/${slug}`,
+    },
+    other: {
+      'script:ld+json': JSON.stringify(articleJsonLd),
+    },
+  };
+}
 
 export default function ArticlePage() {
-  const params = useParams();
-  const router = useRouter();
-  const slug = params.slug as string;
-
-  const [article, setArticle] = useState<Article | null>(null);
-  const [loading, setLoading] = useState(true);
-  const [notFound, setNotFound] = useState(false);
-
-  useEffect(() => { fetchArticle(); }, [slug]);
-
-  async function fetchArticle() {
-    const { data, error } = await supabase.from('articles').select('*').eq('slug', slug).eq('published', true).single();
-    if (error || !data) { setNotFound(true); setLoading(false); return; }
-    setArticle(data as Article);
-    setNotFound(false);
-    setLoading(false);
-  }
+  return <ArticleContent />;
 
   if (loading) return <div className="min-h-screen flex items-center justify-center"><div className="text-sm font-semibold tracking-widest uppercase text-text-muted">Loading...</div></div>;
   if (notFound || !article) return <div className="min-h-screen flex flex-col items-center justify-center"><h1 className="text-5xl text-text mb-4 font-display">Article Not Found</h1><button onClick={() => router.push('/blog')} className="btn-accent">Return</button></div>;
@@ -59,4 +112,5 @@ export default function ArticlePage() {
       </div>
     </article>
   );
+ main
 }
